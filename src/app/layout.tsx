@@ -17,6 +17,8 @@ export const metadata = {
     description: "AI Powered Campus Security & Attendance System",
 };
 
+import { AuthProvider } from "@/context/AuthContext";
+
 export default function RootLayout({
     children,
 }: Readonly<{
@@ -25,7 +27,9 @@ export default function RootLayout({
     return (
         <html lang="en" data-theme="light">
             <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-base-100`}>
-                {children}
+                <AuthProvider>
+                    {children}
+                </AuthProvider>
                 <Toaster position="top-right" />
             </body>
         </html>

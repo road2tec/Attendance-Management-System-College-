@@ -22,8 +22,13 @@ export default function AdminDashboardPage() {
   });
   const [todayList, setTodayList] = useState<any[]>([]);
 
+  const [backendError, setBackendError] = useState(false);
+
   useEffect(() => {
     fetchData();
+    // Auto-refresh data every 5 seconds for "live" feel
+    const interval = setInterval(fetchData, 5000);
+    return () => clearInterval(interval);
   }, []);
 
   const fetchData = async () => {
@@ -33,16 +38,36 @@ export default function AdminDashboardPage() {
 
       const todayRes = await api.get(endpoints.attendance.today);
       setTodayList(todayRes.data);
-    } catch (err) {
-      console.error("Failed to fetch dashboard data");
+      setBackendError(false);
+    } catch (err: any) {
+      console.error("Failed to fetch dashboard data:", err);
+      // Check if it is a network error
+      setBackendError(true);
     }
   };
 
+  if (backendError) {
+    return (
+      <div className="p-10 flex flex-col items-center justify-center min-h-[50vh] text-center space-y-4">
+        <div className="text-red-500 bg-red-100 p-4 rounded-full">
+          <IconX size={48} />
+        </div>
+        <h2 className="text-2xl font-bold text-gray-800">Backend is Offline</h2>
+        <p className="text-gray-600 max-w-md">
+          Cannot connect to the Vidya Rakshak Server. Please ensure <code>start_backend.bat</code> is running in the terminal.
+        </p>
+        <button onClick={() => window.location.reload()} className="btn btn-primary">
+          Retry Connection
+        </button>
+      </div>
+    )
+  }
+
   const statCards = [
-    { title: "Total Students", value: stats.totalStudents, icon: IconUsers, color: "text-blue-600", bg: "bg-blue-100" },
-    { title: "Present Today", value: stats.presentToday, icon: IconCheck, color: "text-emerald-600", bg: "bg-emerald-100" },
-    { title: "Absent", value: stats.absentToday, icon: IconX, color: "text-rose-600", bg: "bg-rose-100" },
-    { title: "Daily Avg %", value: stats.attendancePercentage + "%", icon: IconClock, color: "text-amber-600", bg: "bg-amber-100" },
+    { title: "Total Students", value: stats?.totalStudents || 0, icon: IconUsers, color: "text-blue-600", bg: "bg-blue-100" },
+    { title: "Present Today", value: stats?.presentToday || 0, icon: IconCheck, color: "text-emerald-600", bg: "bg-emerald-100" },
+    { title: "Absent", value: stats?.absentToday || 0, icon: IconX, color: "text-rose-600", bg: "bg-rose-100" },
+    { title: "Daily Avg %", value: (stats?.attendancePercentage || 0) + "%", icon: IconClock, color: "text-amber-600", bg: "bg-amber-100" },
   ];
 
   // Dummy chart data for demo (backend doesn't fully support historical yet)

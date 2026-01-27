@@ -12,11 +12,16 @@ export const api = axios.create({
 export const endpoints = {
     auth: {
         login: "/admin/login",
+        studentLogin: "/student/login",
+    },
+    student: {
+        profile: (id: string) => `/student/me/${id}`,
     },
     students: {
         getAll: "/students/",
         add: "/students/add",
         delete: (id: string) => `/students/${id}`,
+        update: (id: string) => `/students/${id}`,
     },
     attendance: {
         mark: "/attendance/mark",

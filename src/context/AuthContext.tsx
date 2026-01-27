@@ -33,15 +33,26 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const login = (userData: Admin) => {
+    console.log("LOGIN CALLED WITH USER:", userData); // One-time Debug Log
     setUser(userData);
     localStorage.setItem("vidya_admin_user", JSON.stringify(userData));
-    router.push("/admin/dashboard");
+
+    // Normalize role check (case-insensitive just in case)
+    const role = (userData.role || "").toLowerCase();
+
+    if (role === 'student') {
+      console.log("Redirecting to STUDENT dashboard");
+      window.location.href = "/student/dashboard";
+    } else {
+      console.log("Redirecting to ADMIN dashboard");
+      window.location.href = "/admin/dashboard";
+    }
   };
 
   const logout = () => {
     setUser(null);
     localStorage.removeItem("vidya_admin_user");
-    router.push("/login");
+    router.push("/login?redirect=false"); // Prevent auto-redirect loop
   };
 
   return (

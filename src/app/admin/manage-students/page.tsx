@@ -2,13 +2,23 @@
 import { useEffect, useState } from "react";
 import { api, endpoints } from "@/lib/api";
 import SectionTitle from "@/components/SectionTitle";
-import { IconPlus, IconTrash, IconSearch, IconUpload } from "@tabler/icons-react";
+import { IconPlus, IconTrash, IconSearch, IconPencil } from "@tabler/icons-react";
 import Image from "next/image";
+
+import Webcam from "react-webcam";
+import { useRef } from "react";
 
 export default function ManageStudentsPage() {
   const [students, setStudents] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [editingId, setEditingId] = useState<string | null>(null);
+
+  // Webcam &  Capture State
+  const webcamRef = useRef<Webcam>(null);
+  const [captures, setCaptures] = useState<string[]>([]);
+  const [isCameraOpen, setIsCameraOpen] = useState(false);
 
   // Form State
   const [formData, setFormData] = useState({
@@ -16,8 +26,7 @@ export default function ManageStudentsPage() {
     rollNo: "",
     department: "",
     email: "",
-    phone: "",
-    file: null as File | null
+    phone: ""
   });
 
   useEffect(() => {
@@ -38,34 +47,78 @@ export default function ManageStudentsPage() {
     try {
       await api.delete(endpoints.students.delete(id));
       fetchStudents();
+      alert("Deleted successfully");
     } catch (err) {
       alert("Failed to delete");
     }
   };
 
+  const handleEdit = (student: any) => {
+    setFormData({
+      name: student.name,
+      rollNo: student.rollNo,
+      department: student.department || "",
+      email: student.email,
+      phone: student.phone
+    });
+    setCaptures([]); // Reset captures, optionally could load exist profile image
+    setEditingId(student.id);
+    setIsEditMode(true);
+    setIsModalOpen(true);
+  };
+
+  const openAddModal = () => {
+    setFormData({ name: "", rollNo: "", department: "", email: "", phone: "" });
+    setCaptures([]);
+    setIsEditMode(false);
+    setEditingId(null);
+    setIsModalOpen(true);
+  }
+
+  const capture = () => {
+    if (webcamRef.current) {
+      const imageSrc = webcamRef.current.getScreenshot();
+      if (imageSrc) {
+        setCaptures(prev => [...prev, imageSrc]);
+      }
+    }
+  };
+
+  const clearCaptures = () => {
+    setCaptures([]);
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.file) return alert("Please upload a photo");
+
+    // Validation
+    if (!isEditMode && captures.length < 1) return alert("Please capture at least 1 photo for new students");
 
     setLoading(true);
-    const data = new FormData();
-    data.append("name", formData.name);
-    data.append("rollNo", formData.rollNo);
-    data.append("department", formData.department);
-    data.append("email", formData.email);
-    data.append("phone", formData.phone);
-    data.append("file", formData.file);
 
     try {
-      await api.post(endpoints.students.add, data, {
-        headers: { "Content-Type": "multipart/form-data" }
-      });
+      if (isEditMode && editingId) {
+        // Update Logic
+        const payload: any = { ...formData };
+        // Only send images if new ones are captured (optional logic, mostly we just update text fields)
+        // For now, let's keep it simple: strict text update for edits, unless re-registering
+
+        await api.put(endpoints.students.update(editingId), payload);
+        alert("Student Updated Successfully!");
+      } else {
+        // Add Logic
+        const payload = { ...formData, images: captures };
+        await api.post(endpoints.students.add, payload);
+        alert("Student Added Successfully!");
+      }
+
       setIsModalOpen(false);
-      setFormData({ name: "", rollNo: "", department: "", email: "", phone: "", file: null });
+      setFormData({ name: "", rollNo: "", department: "", email: "", phone: "" });
+      setCaptures([]);
       fetchStudents();
-      alert("Student Added Successfully!");
+
     } catch (err: any) {
-      alert(err.response?.data?.detail || "Failed to add student");
+      alert(err.response?.data?.detail || "Operation failed");
     } finally {
       setLoading(false);
     }
@@ -76,7 +129,7 @@ export default function ManageStudentsPage() {
       <div className="flex justify-between items-center mb-6">
         <SectionTitle title="Manage Students" />
         <button
-          onClick={() => setIsModalOpen(true)}
+          onClick={openAddModal}
           className="btn btn-primary bg-teal-600 border-none hover:bg-teal-700 text-white gap-2"
         >
           <IconPlus size={20} /> Add Student
@@ -126,12 +179,20 @@ export default function ManageStudentsPage() {
                     <div className="text-xs opacity-50">{student.phone}</div>
                   </td>
                   <td>
-                    <button
-                      onClick={() => handleDelete(student.id)}
-                      className="btn btn-ghost btn-sm text-error"
-                    >
-                      <IconTrash size={18} />
-                    </button>
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => handleEdit(student)}
+                        className="btn btn-ghost btn-sm text-info"
+                      >
+                        <IconPencil size={18} />
+                      </button>
+                      <button
+                        onClick={() => handleDelete(student.id)}
+                        className="btn btn-ghost btn-sm text-error"
+                      >
+                        <IconTrash size={18} />
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -147,10 +208,12 @@ export default function ManageStudentsPage() {
 
       {/* Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
-          <div className="card w-full max-w-lg bg-white shadow-2xl">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm overflow-y-auto py-10">
+          <div className="card w-full max-w-2xl bg-white shadow-2xl">
             <form onSubmit={handleSubmit} className="card-body">
-              <h3 className="text-xl font-bold mb-4 text-gray-800">Add New Student</h3>
+              <h3 className="text-xl font-bold mb-4 text-gray-800">
+                {isEditMode ? "Edit Student Details" : "Add New Student"}
+              </h3>
 
               <div className="grid grid-cols-2 gap-4">
                 <div className="form-control">
@@ -190,19 +253,61 @@ export default function ManageStudentsPage() {
                 </div>
               </div>
 
-              <div className="form-control">
-                <label className="label text-xs font-semibold uppercase text-gray-500">Photo (For Face ID)</label>
-                <input required type="file" className="file-input file-input-bordered w-full" accept="image/*"
-                  onChange={e => setFormData({ ...formData, file: e.target.files ? e.target.files[0] : null })} />
-                <label className="label">
-                  <span className="label-text-alt text-warning">Must be a clear front-facing photo</span>
-                </label>
-              </div>
+              {/* Camera Section (Only show for Add Mode or explicit Request) */}
+              {!isEditMode && (
+                <div className="form-control mt-4">
+                  <label className="label text-xs font-semibold uppercase text-gray-500">Face Registration (Capture 4-5 Samples)</label>
+
+                  <div className="border border-gra-200 rounded-lg p-4 bg-gray-50 text-center">
+                    {isCameraOpen ? (
+                      <>
+                        <Webcam
+                          audio={false}
+                          ref={webcamRef}
+                          screenshotFormat="image/jpeg"
+                          screenshotQuality={0.8}
+                          className="w-full rounded-lg mb-4"
+                          videoConstraints={{ facingMode: "user" }}
+                        />
+                        <div className="flex justify-center gap-2">
+                          <button type="button" onClick={capture} className="btn btn-secondary btn-sm">
+                            <IconSearch size={16} /> Capture ({captures.length})
+                          </button>
+                          <button type="button" onClick={() => setIsCameraOpen(false)} className="btn btn-ghost btn-sm">
+                            Close Camera
+                          </button>
+                        </div>
+                      </>
+                    ) : (
+                      <button type="button" onClick={() => setIsCameraOpen(true)} className="btn btn-outline btn-block">
+                        <IconSearch size={20} /> Open Camera to Register Face
+                      </button>
+                    )}
+                  </div>
+
+                  {/* Thumbnails */}
+                  {captures.length > 0 && (
+                    <div className="mt-4">
+                      <div className="flex gap-2 overflow-x-auto pb-2">
+                        {captures.map((img, idx) => (
+                          <div key={idx} className="relative w-16 h-16 flex-shrink-0">
+                            <img src={img} className="w-full h-full object-cover rounded-lg border border-gray-300" />
+                          </div>
+                        ))}
+                      </div>
+                      <div className="flex justify-between items-center mt-2">
+                        <span className="text-xs text-gray-500">{captures.length} samples captured</span>
+                        <button type="button" onClick={clearCaptures} className="btn btn-xs btn-error btn-outline">Clear All</button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
 
               <div className="card-actions justify-end mt-6">
                 <button type="button" className="btn btn-ghost" onClick={() => setIsModalOpen(false)}>Cancel</button>
                 <button type="submit" disabled={loading} className="btn btn-primary bg-teal-600 text-white">
-                  {loading ? <span className="loading loading-spinner"></span> : "Save Student"}
+                  {loading ? <span className="loading loading-spinner"></span> : (isEditMode ? "Update Student" : "Save Student")}
                 </button>
               </div>
             </form>

@@ -13,6 +13,7 @@ import mediapipe as mp
 import base64
 import shutil
 import threading
+from typing import List
 from datetime import datetime
 from pymongo import MongoClient
 import glob
@@ -31,19 +32,23 @@ from .database import students_collection, attendance_collection, admin_collecti
 STUDENT_IMAGES_DIR = "backend/Student_Images"
 UPLOAD_DIR = "public/uploads"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
-SIMILARITY_THRESHOLD = 0.65 
+SIMILARITY_THRESHOLD = 0.45 
 
 # ==== MEDIAPIPE LAZY SETUP ====
 mp_face_detection = None
-face_detection = None
+face_detection_model = None
 
 def get_face_detector():
-    global mp_face_detection, face_detection
-    if face_detection is None:
+    global mp_face_detection, face_detection_model
+    if face_detection_model is None:
         print("[INFO] Initializing MediaPipe Face Detection...")
         mp_face_detection = mp.solutions.face_detection
-        face_detection = mp_face_detection.FaceDetection(model_selection=1, min_detection_confidence=0.5)
-    return face_detection
+        # Using model=0 for short range (ideal for selfie/webcam)
+        face_detection_model = mp_face_detection.FaceDetection(
+            model_selection=0,
+            min_detection_confidence=0.4
+        )
+    return face_detection_model
 
 # ==== GLOBAL STATE ====
 known_faces = [] # List of {"name": name, "hist": histogram}
@@ -70,13 +75,15 @@ def get_face_embedding(image, silent=False):
         return None
         
     height, width, _ = image.shape
+    # if not silent: print(f"[DEBUG] Processing image: {width}x{height}")
+
     rgb_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     
     detector = get_face_detector()
     results = detector.process(rgb_image)
 
     if not results or not results.detections:
-        if not silent: print("[WARNING] No face detected by MediaPipe")
+        if not silent: print(f"[WARNING] No face detected by MediaPipe in {width}x{height} image")
         return None
 
     if not silent: print(f"[INFO] Detected {len(results.detections)} face(s)")
@@ -117,16 +124,27 @@ def load_known_faces():
                 hist = get_face_embedding(img, silent=True)
                 if hist is not None:
                     name = os.path.basename(os.path.dirname(file_path)) or os.path.splitext(os.path.basename(file_path))[0]
-                    known_faces.append({"name": name, "hist": hist})
+                    # Try to associate with database ID for attendance records
+                    student_doc = students_collection.find_one({"name": name})
+                    student_id = str(student_doc["_id"]) if student_doc else None
+                    known_faces.append({"id": student_id, "name": name, "hist": hist})
 
     # 2. Load from Database
-    db_students = list(students_collection.find({"faceEmbedding": {"$exists": True}}))
+    db_students = list(students_collection.find({"$or": [{"faceEmbedding": {"$exists": True}}, {"faceEmbeddings": {"$exists": True}}]}))
     for s in db_students:
         try:
-            # Reshape based on new 32x32 size
-            hist = np.array(s["faceEmbedding"], dtype=np.float32).reshape(32, 32)
-            known_faces.append({"name": s["name"], "hist": hist})
-        except:
+            # New Multi-Sample Schema
+            if "faceEmbeddings" in s and isinstance(s["faceEmbeddings"], list):
+                for emb in s["faceEmbeddings"]:
+                    hist = np.array(emb, dtype=np.float32).reshape(32, 32)
+                    known_faces.append({"id": str(s["_id"]), "name": s["name"], "hist": hist, "embeddings": [emb]})
+            
+            # Legacy Single-Sample Schema
+            elif "faceEmbedding" in s:
+                hist = np.array(s["faceEmbedding"], dtype=np.float32).reshape(32, 32)
+                known_faces.append({"id": str(s["_id"]), "name": s["name"], "hist": hist, "embeddings": [s["faceEmbedding"]]})
+        except Exception as e:
+            print(f"[ERROR] Loading face for {s.get('name')}: {e}")
             continue
             
     print(f"[INFO] Total loaded reference faces: {len(known_faces)}")
@@ -171,6 +189,66 @@ async def login(data: LoginRequest):
     
     raise HTTPException(status_code=401, detail="Invalid Credentials")
 
+# Student Login
+class StudentLoginRequest(BaseModel):
+    email: str
+    rollNo: str
+
+@app.post("/student/login")
+async def student_login(data: StudentLoginRequest):
+    student = students_collection.find_one({"email": data.email, "rollNo": data.rollNo})
+    if not student:
+        raise HTTPException(status_code=401, detail="Invalid Email or Roll Number")
+    
+    return {
+        "user": {
+            "id": str(student["_id"]),
+            "name": student["name"],
+            "email": student["email"],
+            "rollNo": student["rollNo"],
+            "department": student.get("department", "General"),
+            "profileImage": student.get("profileImage", ""),
+            "role": "student"
+        }
+    }
+
+@app.get("/student/me/{student_id}")
+async def get_student_profile(student_id: str):
+    try:
+        student = students_collection.find_one({"_id": ObjectId(student_id)})
+        if not student:
+             raise HTTPException(status_code=404, detail="Student not found")
+        
+        # Get Attendance Stats
+        attendance_records = list(attendance_collection.find({"studentId": student_id}).sort("date", -1))
+        
+        total_days = 30 # Mock total working days for percentage or calculate dynamically
+        present_days = len(attendance_records)
+        percentage = (present_days / total_days * 100) if total_days > 0 else 0
+        
+        return {
+            "profile": {
+                "name": student["name"],
+                "rollNo": student["rollNo"],
+                "department": student.get("department", "General"),
+                "email": student["email"],
+                "phone": student.get("phone", ""),
+                "profileImage": student.get("profileImage", "")
+            },
+            "stats": {
+                "totalWorkingDays": total_days,
+                "presentDays": present_days,
+                "absentDays": total_days - present_days,
+                "percentage": round(percentage, 1)
+            },
+            "history": [
+                {"date": r["date"], "time": r["time"], "status": "Present"} for r in attendance_records
+            ]
+        }
+    except Exception as e:
+         print(e)
+         raise HTTPException(status_code=500, detail="Failed to fetch profile")
+
 # ==== STUDENT ROUTES ====
 
 @app.get("/students/")
@@ -182,52 +260,113 @@ async def get_students():
         if "faceEmbedding" in s: del s["faceEmbedding"]
     return students
 
+class StudentAddRequest(BaseModel):
+    name: str
+    rollNo: str
+    department: str
+    email: str
+    phone: str
+    images: List[str] # List of Base64 strings
+
 @app.post("/students/add")
-async def add_student(
-    name: str = Form(...),
-    rollNo: str = Form(...),
-    department: str = Form(...),
-    email: str = Form(...),
-    phone: str = Form(...),
-    file: UploadFile = File(...)
-):
-    if students_collection.find_one({"rollNo": rollNo}):
+async def add_student(student: StudentAddRequest):
+    if students_collection.find_one({"rollNo": student.rollNo}):
         raise HTTPException(status_code=400, detail="Student already exists")
 
-    # Save photo
+    if not student.images:
+        raise HTTPException(status_code=400, detail="No images provided")
+
+    embeddings = []
+    saved_profile_image = ""
+    
+    # Ensure upload dir exists
     os.makedirs(UPLOAD_DIR, exist_ok=True)
-    filename = f"{rollNo}_{file.filename}"
-    filepath = os.path.join(UPLOAD_DIR, filename)
-    with open(filepath, "wb") as buffer:
-        shutil.copyfileobj(file.file, buffer)
 
-    # Process embedding
-    img = cv2.imread(filepath)
-    hist = get_face_embedding(img)
-    if hist is None:
-        if os.path.exists(filepath): os.remove(filepath)
-        raise HTTPException(status_code=400, detail="No face detected in photo")
+    print(f"[INFO] Processing {len(student.images)} images for {student.name}")
 
-    print(f"[INFO] Adding student: {name}, {rollNo}")
+    for idx, img_b64 in enumerate(student.images):
+        try:
+            # Decode Base64
+            if "," in img_b64:
+                img_b64 = img_b64.split(",")[1]
+            
+            image_data = base64.b64decode(img_b64)
+            np_arr = np.frombuffer(image_data, np.uint8)
+            img = cv2.imdecode(np_arr, cv2.IMREAD_COLOR)
+            
+            if img is None: continue
+
+            # Generate Embedding
+            emb = get_face_embedding(img, silent=True)
+            if emb is not None:
+                embeddings.append(emb.flatten().tolist())
+                
+                # Save first valid image as profile picture
+                if not saved_profile_image:
+                    filename = f"{student.rollNo}_profile.jpg"
+                    filepath = os.path.join(UPLOAD_DIR, filename)
+                    with open(filepath, "wb") as f:
+                        f.write(image_data)
+                    saved_profile_image = f"/uploads/{filename}"
+            
+        except Exception as e:
+            print(f"[ERROR] Processing image {idx}: {e}")
+            continue
+
+    if not embeddings:
+         raise HTTPException(status_code=400, detail="Could not detect face in any provided images")
+
     student_data = {
-        "name": name,
-        "rollNo": rollNo,
-        "department": department,
-        "email": email,
-        "phone": phone,
-        "profileImage": f"/uploads/{filename}",
-        "faceEmbedding": hist.flatten().tolist(),
+        "name": student.name,
+        "rollNo": student.rollNo,
+        "department": student.department,
+        "email": student.email,
+        "phone": student.phone,
+        "profileImage": saved_profile_image,
+        "faceEmbeddings": embeddings, # Store ARRAY of embeddings
         "createdAt": datetime.now()
     }
     
     result = students_collection.insert_one(student_data)
     load_known_faces() # Reload cache
-    return {"id": str(result.inserted_id), "message": "Student added"}
+    return {"id": str(result.inserted_id), "message": f"Student added with {len(embeddings)} face samples"}
 
 @app.delete("/students/{id}")
 async def delete_student(id: str):
     students_collection.delete_one({"_id": ObjectId(id)})
+    load_known_faces() # Reload cache to remove deleted student
     return {"message": "Deleted"}
+
+class StudentUpdateRequest(BaseModel):
+    name: str = None
+    rollNo: str = None
+    department: str = None
+    email: str = None
+    phone: str = None
+
+@app.put("/students/{id}")
+async def update_student(id: str, student: StudentUpdateRequest):
+    update_data = {k: v for k, v in student.dict().items() if v is not None}
+    
+    if not update_data:
+        raise HTTPException(status_code=400, detail="No fields to update")
+
+    # Check for duplicate rollNo if changing it
+    if "rollNo" in update_data:
+        existing = students_collection.find_one({"rollNo": update_data["rollNo"]})
+        if existing and str(existing["_id"]) != id:
+             raise HTTPException(status_code=400, detail="Roll No already exists")
+
+    result = students_collection.update_one(
+        {"_id": ObjectId(id)}, 
+        {"$set": update_data}
+    )
+    
+    if result.modified_count == 0:
+         raise HTTPException(status_code=404, detail="Student not found or no changes made")
+         
+    load_known_faces() # Reload cache to update changes (e.g. name)
+    return {"message": "Student updated successfully"}
 
 # ==== ATTENDANCE ROUTES ====
 
@@ -247,57 +386,108 @@ async def mark_attendance(data: AttendanceRequest):
 
         if img is None: raise HTTPException(status_code=400, detail="Invalid Image")
 
-        target_hist = get_face_embedding(img)
-        if target_hist is None: return {"status": "failed", "message": "No face detected"}
+        # Use High-Quality Detection for Verification
+        detector_hq = mp.solutions.face_detection.FaceDetection(model_selection=1, min_detection_confidence=0.5)
+        results = detector_hq.process(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+        
+        if not results.detections:
+             detector_hq.close()
+             raise HTTPException(status_code=400, detail="No face detected. Please position better.")
+        
+        # Get target embedding
+        # We need a robust embedding. Re-using the utility function but ensuring it uses the cropped face
+        target_emb = get_face_embedding(img, silent=True)
+        if target_emb is None:
+             raise HTTPException(status_code=400, detail="Face quality too low")
 
         best_score = 0
-        best_match = None
+        best_match_id = None
         
+        # known_faces stores: { "id": str(_id), "embeddings": [list...], "name": ... }
         for person in known_faces:
-            score = cv2.compareHist(target_hist, person["hist"], cv2.HISTCMP_CORREL)
-            if score > best_score:
-                best_score = score
-                best_match = person["name"]
+            # We compare against all stored embeddings for this person
+            person_embeddings = person.get("embeddings", [])
+            
+            # Legacy support (single 'hist' key?) - No, we migrated everything to standard list
+            if not person_embeddings and "hist" in person:
+                 # Fallback if somehow old format lingers in memory
+                 score = cv2.compareHist(target_emb, person["hist"], cv2.HISTCMP_CORREL)
+                 if score > best_score:
+                    best_score = score
+                    best_match_id = person.get("id")
+            
+            # New Multi-Embedding Check (Best of Max)
+            local_best = 0
+            for emb_list in person_embeddings:
+                stored_mat = np.array(emb_list, dtype=np.float32).reshape((32, 32))
+                score = cv2.compareHist(target_emb, stored_mat, cv2.HISTCMP_CORREL)
+                if score > local_best: local_best = score
+            
+            if local_best > best_score:
+                best_score = local_best
+                best_match_id = person.get("id")
 
-        if best_match and best_score > SIMILARITY_THRESHOLD:
-            # Match
-            student_info = students_collection.find_one({
-                "$or": [{"rollNo": best_match}, {"name": best_match}, {"email": best_match}]
+        detector_hq.close()
+
+        print(f"[FACE AUTH] Best Match ID: {best_match_id} | Score: {best_score:.4f} | Threshold: {SIMILARITY_THRESHOLD}")
+
+        if best_match_id and best_score > SIMILARITY_THRESHOLD:
+            # Fetch Student Details
+            student = students_collection.find_one({"_id": ObjectId(best_match_id)})
+            if not student:
+                print(f"[ERROR] Matched ID {best_match_id} but not in DB")
+                raise HTTPException(status_code=404, detail="Student record not found")
+        else:
+             print(f"[AUTH FAIL] Best Score: {best_score} vs Threshold {SIMILARITY_THRESHOLD}")
+             msg = f"Face Not Recognized. Score: {best_score:.2f} (Needs {SIMILARITY_THRESHOLD}). Try better lighting."
+             if len(known_faces) == 0:
+                 msg = "System Error: No student faces loaded in database. Restart Backend."
+             raise HTTPException(status_code=401, detail=msg)
+
+        today = datetime.now().strftime("%Y-%m-%d")
+        existing = attendance_collection.find_one({"studentId": str(student["_id"]), "date": today})
+        
+        if not existing:
+            attendance_collection.insert_one({
+                "studentId": str(student["_id"]), 
+                "studentName": student["name"],
+                "rollNo": student["rollNo"],
+                "date": today,
+                "time": datetime.now().strftime("%H:%M:%S"),
+                "status": "Present"
             })
-            
-            display_name = student_info["name"] if student_info else best_match
-            roll_no = student_info["rollNo"] if student_info else "N/A"
-            dept = student_info.get("department", "")
-
-            today = datetime.now().strftime("%Y-%m-%d")
-            existing = attendance_collection.find_one({"studentName": display_name, "date": today})
-            
-            if not existing:
-                attendance_collection.insert_one({
-                    "studentName": display_name,
-                    "rollNo": roll_no,
-                    "date": today,
-                    "time": datetime.now().strftime("%H:%M:%S"),
-                    "status": "Present"
-                })
-            
             return {
                 "status": "success", 
-                "message": f"Verified: {display_name}", 
-                "student": {"name": display_name, "rollNo": roll_no, "department": dept}
+                "message": f"Attendance Marked: {student['name']}",
+                "student": {"name": student["name"], "rollNo": student["rollNo"]}
             }
-        
-        return {"status": "failed", "message": "ACCESS DENIED: Face Not Recognized"}
+        else:
+            return {
+                "status": "success", 
+                "message": f"Already Marked: {student['name']}",
+                "student": {"name": student["name"], "rollNo": student["rollNo"]}
+            }
 
+    except HTTPException as he:
+        raise he
     except Exception as e:
-        return {"status": "error", "message": str(e)}
+        print(f"Error marking attendance: {e}")
+        raise HTTPException(status_code=500, detail="Server Error Processing Image")
 
 @app.get("/attendance/today")
 async def get_today():
     today = datetime.now().strftime("%Y-%m-%d")
     records = list(attendance_collection.find({"date": today}))
-    for r in records: r["_id"] = str(r["_id"])
-    return records
+    
+    # Manual serialization to ensure no ObjectId leaks
+    cleaned_records = []
+    for r in records:
+        r["_id"] = str(r["_id"])
+        if "studentId" in r and isinstance(r["studentId"], ObjectId):
+             r["studentId"] = str(r["studentId"])
+        cleaned_records.append(r)
+        
+    return cleaned_records
 
 @app.get("/attendance/stats")
 async def get_stats():

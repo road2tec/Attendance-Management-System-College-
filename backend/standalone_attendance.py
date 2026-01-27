@@ -98,8 +98,16 @@ def start_system():
                     max_score = -1
                     
                     for student in all_students:
-                        if "faceEmbedding" in student and student["faceEmbedding"]:
-                            score = compare_embeddings(live_embedding, student["faceEmbedding"])
+                        # Normalize to list of embeddings
+                        student_embeddings = []
+                        if "faceEmbeddings" in student and student["faceEmbeddings"]:
+                            student_embeddings = student["faceEmbeddings"]
+                        elif "faceEmbedding" in student and student["faceEmbedding"]:
+                            student_embeddings = [student["faceEmbedding"]]
+                            
+                        # Compare against all stored embeddings for this student
+                        for stored_emb in student_embeddings:
+                            score = compare_embeddings(live_embedding, stored_emb)
                             if score > max_score:
                                 max_score = score
                                 best_match = student

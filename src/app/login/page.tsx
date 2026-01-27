@@ -7,8 +7,10 @@ import toast, { Toaster } from "react-hot-toast";
 
 export default function LoginPage() {
     const { login } = useAuth();
+    const [loginMode, setLoginMode] = useState<'admin' | 'student'>('admin');
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [rollNo, setRollNo] = useState("");
     const [loading, setLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
 
@@ -42,20 +44,40 @@ export default function LoginPage() {
         setLoading(true);
 
         try {
-            // Backend Auth
-            const res = await api.post(endpoints.auth.login, { email, password });
+            let res;
+            if (loginMode === 'admin') {
+                res = await api.post(endpoints.auth.login, { email, password });
+            } else {
+                res = await api.post(endpoints.auth.studentLogin, { email, rollNo });
+            }
 
             if (res.data.user) {
                 toast.success("Login Successful!");
                 login(res.data.user);
             }
         } catch (err: any) {
-            // Demo Fallback
-            if ((email === "admin@vidya.com" || email === "admin@sbpcoe.ac.in") && password === "admin123") {
-                toast.success("Login Successful!");
+            console.error("Login Error:", err);
+
+            // Demo Fallback for Admin
+            if (loginMode === 'admin' && (email === "admin@vidya.com" || email === "admin@sbpcoe.ac.in") && password === "admin123") {
+                toast.success("Login Successful (Demo Admin)!");
                 login({ name: "Admin User", email: email, role: "admin", profileImage: "" } as any);
-            } else {
-                toast.error(err.response?.data?.detail || "Invalid credentials");
+            }
+            // Demo Fallback for Student
+            else if (loginMode === 'student' && email.includes("@") && rollNo.startsWith("DEMO")) {
+                toast.success("Login Successful (Demo Student)!");
+                login({
+                    id: "demo-student-id",
+                    name: "Demo Student",
+                    email: email,
+                    rollNo: rollNo,
+                    role: "student",
+                    profileImage: "",
+                    department: "Computer Engineering"
+                } as any);
+            }
+            else {
+                toast.error(err.response?.data?.detail || "Invalid credentials or Server Error");
             }
         } finally {
             setLoading(false);
@@ -102,6 +124,22 @@ export default function LoginPage() {
                     <div className="bg-white rounded-xl shadow-2xl p-8 w-full max-w-md animate-fade-in-up">
                         <h2 className="text-2xl font-bold text-gray-800 text-center mb-6">Login to Your Account</h2>
 
+                        {/* Toggle Tabs */}
+                        <div role="tablist" className="tabs tabs-boxed mb-6 bg-gray-100 p-1">
+                            <a role="tab"
+                                className={`tab transition-all duration-300 ${loginMode === 'admin' ? 'tab-active bg-teal-600 text-white shadow-md' : 'text-gray-500'}`}
+                                onClick={() => setLoginMode('admin')}
+                            >
+                                Admin Login
+                            </a>
+                            <a role="tab"
+                                className={`tab transition-all duration-300 ${loginMode === 'student' ? 'tab-active bg-teal-600 text-white shadow-md' : 'text-gray-500'}`}
+                                onClick={() => setLoginMode('student')}
+                            >
+                                Student Login
+                            </a>
+                        </div>
+
                         <form onSubmit={handleSubmit} className="space-y-5">
                             {/* Email */}
                             <div className="form-control">
@@ -110,7 +148,7 @@ export default function LoginPage() {
                                 </label>
                                 <input
                                     type="email"
-                                    placeholder="Enter Admin Email"
+                                    placeholder={loginMode === 'admin' ? "admin@vidya.com" : "student@example.com"}
                                     className="input input-bordered w-full bg-gray-50 focus:border-teal-500 focus:bg-white transition-colors"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
@@ -118,28 +156,42 @@ export default function LoginPage() {
                                 />
                             </div>
 
-                            {/* Password */}
+                            {/* Password / Roll No */}
                             <div className="form-control">
                                 <label className="label py-1">
-                                    <span className="label-text font-semibold text-gray-700 text-xs">Password <span className="text-red-500">*</span></span>
+                                    <span className="label-text font-semibold text-gray-700 text-xs">
+                                        {loginMode === 'admin' ? "Password" : "Roll Number"}
+                                        <span className="text-red-500"> *</span>
+                                    </span>
                                 </label>
-                                <div className="relative">
+                                {loginMode === 'admin' ? (
+                                    <div className="relative">
+                                        <input
+                                            type={showPassword ? "text" : "password"}
+                                            placeholder="Enter Password"
+                                            className="input input-bordered w-full bg-gray-50 focus:border-teal-500 focus:bg-white pr-10"
+                                            value={password}
+                                            onChange={(e) => setPassword(e.target.value)}
+                                            required
+                                        />
+                                        <button
+                                            type="button"
+                                            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                                            onClick={() => setShowPassword(!showPassword)}
+                                        >
+                                            {showPassword ? <IconEyeOff size={20} /> : <IconEye size={20} />}
+                                        </button>
+                                    </div>
+                                ) : (
                                     <input
-                                        type={showPassword ? "text" : "password"}
-                                        placeholder="Enter Password"
-                                        className="input input-bordered w-full bg-gray-50 focus:border-teal-500 focus:bg-white pr-10"
-                                        value={password}
-                                        onChange={(e) => setPassword(e.target.value)}
+                                        type="text"
+                                        placeholder="e.g. CS-2024-01"
+                                        className="input input-bordered w-full bg-gray-50 focus:border-teal-500 focus:bg-white"
+                                        value={rollNo}
+                                        onChange={(e) => setRollNo(e.target.value)}
                                         required
                                     />
-                                    <button
-                                        type="button"
-                                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
-                                        onClick={() => setShowPassword(!showPassword)}
-                                    >
-                                        {showPassword ? <IconEyeOff size={20} /> : <IconEye size={20} />}
-                                    </button>
-                                </div>
+                                )}
                             </div>
 
                             {/* Captcha */}
@@ -185,7 +237,7 @@ export default function LoginPage() {
                                 className="btn w-full bg-[#758CA3] hover:bg-[#5e7185] text-white border-none shadow-md mt-4 text-sm font-normal normal-case h-11"
                                 disabled={loading}
                             >
-                                {loading ? <span className="loading loading-spinner"></span> : "Login"}
+                                {loading ? <span className="loading loading-spinner"></span> : (loginMode === 'admin' ? "Admin Login" : "Student Login")}
                             </button>
                         </form>
                     </div>

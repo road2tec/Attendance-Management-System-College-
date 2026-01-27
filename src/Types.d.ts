@@ -2,8 +2,10 @@ export interface Admin {
   id: string;
   name: string;
   email: string;
-  role: "admin";
+  role: "admin" | "student";
   profileImage?: string;
+  department?: string;
+  rollNo?: string;
 }
 
 export interface Student {
