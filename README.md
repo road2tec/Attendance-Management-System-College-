@@ -3,18 +3,18 @@
 Vidya Rakshak is a modern, AI-driven attendance management system designed for educational institutions. It uses face recognition technology to automate attendance tracking and provide real-time monitoring and analytics.
 
 ## 🚀 Features
-- **Face Recognition Attendance**: Automated marking of attendance using MediaPipe.
-- **Admin Dashboard**: Comprehensive dashboard for managing students, viewing statistics, and tracking daily attendance.
-- **Smart Camera Module**: Standalone real-time face tracking and recognition window.
-- **Robust Backend**: Fast API based server with MongoDB integration.
-- **Modern UI**: Clean, responsive frontend built with Next.js 15 and Tailwind CSS.
+- **Face Recognition Attendance**: Automated marking via webcam (Threshold 0.45).
+- **Dual Dashboards**: Dedicated interfaces for both Admin (Overview & Management) and Students (History & Profile).
+- **Live Updates**: Real-time polling for instant attendance visibility on both dashboards.
+- **Robust Backend**: FastAPI server with MongoDB and MediaPipe integration.
+- **Modern UI**: Clean, responsive frontend built with Next.js 15, DaisyUI, and Tailwind CSS.
 
 ## 📁 Project Structure
 - `/src`: Frontend application (Next.js 15).
 - `/backend`: Core logic, API routes, and AI models.
 - `/public/uploads`: Storage for student profile photos.
-- `start_backend.bat`: Start the FastAPI server.
-- `start_smart_camera.bat`: Start the standalone AI camera interface.
+- `start_backend.bat`: Launches the FastAPI server (Port 8001).
+- `DEMO_SCRIPT.md`: Step-by-step guide for project demonstration.
 
 ## 🛠️ Setup Instructions
 
@@ -25,8 +25,7 @@ Vidya Rakshak is a modern, AI-driven attendance management system designed for e
 
 ### 1. Backend Setup
 ```bash
-cd backend
-pip install -r requirements.txt
+pip install -r backend/requirements.txt
 ```
 
 ### 2. Frontend Setup
@@ -35,9 +34,9 @@ npm install
 ```
 
 ### 3. Running the Project
-- **Start Backend**: Run `start_backend.bat` (Starts on port 8001).
-- **Start Frontend**: Run `npm run dev`.
-- **Start AI Camera**: Run `start_smart_camera.bat`.
+- **Step 1 (Backend)**: Run `.\start_backend.bat`.
+- **Step 2 (Frontend)**: Run `npm run dev`.
+- **Access**: Go to `http://localhost:3000` in your browser.
 
 ## ⚙️ Configuration
 The system uses an `.env` file for configuration. Ensure the `MONGO_URI` is correctly set to your MongoDB instance.

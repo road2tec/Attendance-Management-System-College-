@@ -219,8 +219,11 @@ async def get_student_profile(student_id: str):
         if not student:
              raise HTTPException(status_code=404, detail="Student not found")
         
-        # Get Attendance Stats
-        attendance_records = list(attendance_collection.find({"studentId": student_id}).sort("date", -1))
+        # Get Attendance Stats (Robust match for both string and ObjectId)
+        query = {"$or": [{"studentId": student_id}, {"studentId": ObjectId(student_id)}]}
+        attendance_records = list(attendance_collection.find(query).sort("date", -1))
+        
+        print(f"[DEBUG] Fetching Profile for {student_id}: Found {len(attendance_records)} records")
         
         total_days = 30 # Mock total working days for percentage or calculate dynamically
         present_days = len(attendance_records)
@@ -445,7 +448,12 @@ async def mark_attendance(data: AttendanceRequest):
              raise HTTPException(status_code=401, detail=msg)
 
         today = datetime.now().strftime("%Y-%m-%d")
-        existing = attendance_collection.find_one({"studentId": str(student["_id"]), "date": today})
+        # Robust check for existing record (string or ObjectId)
+        existing_query = {
+            "$or": [{"studentId": str(student["_id"])}, {"studentId": student["_id"]}], 
+            "date": today
+        }
+        existing = attendance_collection.find_one(existing_query)
         
         if not existing:
             attendance_collection.insert_one({
