@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+opencv-python
+numpy
+mediapipe>=0.10.30
+pymongo
+python-dotenv
+pydantic
+python-multipart
+pillow
+requests
