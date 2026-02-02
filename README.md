@@ -6,6 +6,7 @@ Vidya Rakshak is a modern, AI-driven attendance management system designed for e
 - **Face Recognition Attendance**: Automated marking via webcam (Threshold 0.45).
 - **Dual Dashboards**: Dedicated interfaces for both Admin (Overview & Management) and Students (History & Profile).
 - **Live Updates**: Real-time polling for instant attendance visibility on both dashboards.
+- **Indoor Navigation**: Graph-based shortest path finder (Dijkstra's Algo) with interactive map visualization.
 - **Robust Backend**: FastAPI server with MongoDB and MediaPipe integration.
 - **Modern UI**: Clean, responsive frontend built with Next.js 15, DaisyUI, and Tailwind CSS.
 

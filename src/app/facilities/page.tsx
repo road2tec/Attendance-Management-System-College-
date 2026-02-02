@@ -1,4 +1,4 @@
-import { IconBook, IconBus, IconWifi, IconBed, IconFirstAidKit } from "@tabler/icons-react";
+import { IconBook, IconBus, IconWifi, IconBed, IconFirstAidKit, IconBallFootball } from "@tabler/icons-react";
 
 const facilities = [
     {
@@ -10,6 +10,11 @@ const facilities = [
         title: "Transport",
         icon: IconBus,
         desc: "Fleet of 15+ buses covering Indapur, Baramati, and surrounding rural areas for easy commute."
+    },
+    {
+        title: "Sports Complex",
+        icon: IconBallFootball,
+        desc: "Huge playground for Cricket, Football, and Volleyball, plus indoor games like Chess and Badminton."
     },
     {
         title: "Wi-Fi Campus",

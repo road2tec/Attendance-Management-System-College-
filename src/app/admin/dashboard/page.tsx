@@ -76,7 +76,7 @@ export default function AdminDashboardPage() {
     { day: "Tue", attendance: 88 },
     { day: "Wed", attendance: 92 },
     { day: "Thu", attendance: 90 },
-    { day: "Fri", attendance: stats.attendancePercentage || 85 },
+    { day: "Fri", attendance: stats?.attendancePercentage || 85 },
   ];
 
   return (

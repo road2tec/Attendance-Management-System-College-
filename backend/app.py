@@ -225,9 +225,11 @@ async def get_student_profile(student_id: str):
         
         print(f"[DEBUG] Fetching Profile for {student_id}: Found {len(attendance_records)} records")
         
-        total_days = 30 # Mock total working days for percentage or calculate dynamically
+        # Calculate dynamic working days (unique attendance dates in system)
+        unique_dates = attendance_collection.distinct("date")
+        total_days = max(1, len(unique_dates)) 
         present_days = len(attendance_records)
-        percentage = (present_days / total_days * 100) if total_days > 0 else 0
+        percentage = (present_days / total_days * 100)
         
         return {
             "profile": {
@@ -454,22 +456,26 @@ async def mark_attendance(data: AttendanceRequest):
             "date": today
         }
         existing = attendance_collection.find_one(existing_query)
+        print(f"[DEBUG] Check Existing for {student['name']}: {'Found' if existing else 'Not Found'}")
         
         if not existing:
-            attendance_collection.insert_one({
+            new_record = {
                 "studentId": str(student["_id"]), 
                 "studentName": student["name"],
                 "rollNo": student["rollNo"],
                 "date": today,
                 "time": datetime.now().strftime("%H:%M:%S"),
                 "status": "Present"
-            })
+            }
+            res = attendance_collection.insert_one(new_record)
+            print(f"[DEBUG] Inserted new record for {student['name']}. ID: {res.inserted_id}")
             return {
                 "status": "success", 
                 "message": f"Attendance Marked: {student['name']}",
                 "student": {"name": student["name"], "rollNo": student["rollNo"]}
             }
         else:
+            print(f"[DEBUG] {student['name']} already marked today.")
             return {
                 "status": "success", 
                 "message": f"Already Marked: {student['name']}",
@@ -486,6 +492,7 @@ async def mark_attendance(data: AttendanceRequest):
 async def get_today():
     today = datetime.now().strftime("%Y-%m-%d")
     records = list(attendance_collection.find({"date": today}))
+    print(f"[DEBUG] Today's Attendance Request: Found {len(records)} records for {today}")
     
     # Manual serialization to ensure no ObjectId leaks
     cleaned_records = []
@@ -502,6 +509,7 @@ async def get_stats():
     today = datetime.now().strftime("%Y-%m-%d")
     total = students_collection.count_documents({})
     present = attendance_collection.count_documents({"date": today})
+    print(f"[DEBUG] Stats Request - Today: {today} | Total: {total} | Present: {present}")
     return {
         "totalStudents": total,
         "presentToday": present,

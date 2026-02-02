@@ -1,10 +1,22 @@
-import { IconCpu, IconBuildingBridge, IconSettings, IconDeviceDesktop, IconAntennaBars5 } from "@tabler/icons-react";
+import { IconCpu, IconBuildingBridge, IconSettings, IconDeviceDesktop, IconAntennaBars5, IconBrain, IconServer } from "@tabler/icons-react";
 
 const departments = [
     {
         name: "Computer Engineering",
         icon: IconDeviceDesktop,
         desc: "Focusing on software development, AI, and modern computing technologies.",
+        intake: 60
+    },
+    {
+        name: "Artificial Intelligence & DS",
+        icon: IconBrain,
+        desc: "Cutting-edge curriculum covering Machine Learning, Big Data, and Neural Networks.",
+        intake: 60
+    },
+    {
+        name: "Information Technology",
+        icon: IconServer,
+        desc: "Expertise in networking, cloud computing, cyber security, and enterprise solutions.",
         intake: 60
     },
     {

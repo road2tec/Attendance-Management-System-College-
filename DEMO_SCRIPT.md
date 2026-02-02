@@ -15,7 +15,7 @@ Use this script to demonstrate your project during the final viva/exam.
     ```
 4.  Open Browser to: `http://localhost:3000`
 
-## 2. Admin Demo (The "College Side")
+## 2. Admin Demo (The "College Side") 
 1.  **Login**:
     *   Click **Admin Login**.
     *   Email: `admin@vidya.com`
