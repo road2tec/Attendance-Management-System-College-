@@ -130,7 +130,7 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
                     </span>
                   </div>
                   <hr className="w-full border border-base-content hidden lg:block" />
-                  <span className="text-sm text-base-content/70 italic hidden lg:block">
+                  <span className="text-sm text-base-content/70 hidden lg:block">
                     SPVP's SB Patil College, Indapur
                   </span>
                 </div>

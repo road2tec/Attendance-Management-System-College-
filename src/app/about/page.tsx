@@ -38,7 +38,7 @@ export default function AboutPage() {
                 <section className="grid md:grid-cols-2 gap-8">
                     <div className="bg-gray-50 p-8 rounded-xl border-l-4 border-yellow-500 shadow-sm">
                         <h3 className="text-xl font-bold text-gray-800 mb-4">Our Vision</h3>
-                        <p className="text-gray-600 italic">
+                        <p className="text-gray-600">
                             "To serve the society, industry and all stakeholders through value-added quality education and create competent and professional engineers."
                         </p>
                     </div>
@@ -60,7 +60,7 @@ export default function AboutPage() {
                         </div>
                         <div>
                             <h3 className="text-2xl font-bold mb-2">From the Principal's Desk</h3>
-                            <p className="opacity-90 leading-relaxed italic mb-4">
+                            <p className="opacity-90 leading-relaxed mb-4">
                                 "We believe in holistic development. Education is not just about syllabus, but about building character and capability. S.B. Patil College provides the perfect ecosystem for this growth."
                             </p>
                             <p className="font-bold text-yellow-300">– Dr. Shrinivas Shirkande</p>
