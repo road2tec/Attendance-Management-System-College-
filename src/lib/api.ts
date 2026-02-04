@@ -25,6 +25,7 @@ export const endpoints = {
     },
     attendance: {
         mark: "/attendance/mark",
+        recognize: "/face/recognize",
         today: "/attendance/today",
         stats: "/attendance/stats",
     },

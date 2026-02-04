@@ -71,15 +71,15 @@ export default function AboutPage() {
 
                 {/* Campus Gallery Section */}
                 <section className="py-8">
-                    <h2 className="text-3xl font-bold text-center text-gray-800 mb-10">Campus Gallery</h2>
+                    <h2 className="text-3xl font-bold text-center text-gray-800 mb-10">Campus Gallery & Sports</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                         {[
-                            { url: "https://images.shiksha.com/mediadata/images/1545041008phpmP3O6v.jpeg", title: "College Campus" },
-                            { url: "https://images.shiksha.com/mediadata/images/1545041001phph93B3V.jpeg", title: "Main Building" },
-                            { url: "https://images.shiksha.com/mediadata/images/1545041003phpzHREjA.jpeg", title: "Classrooms" },
-                            { url: "https://images.shiksha.com/mediadata/images/1545041005phppWqclt.jpeg", title: "Labs" },
-                            { url: "https://images.shiksha.com/mediadata/images/1544158428phpIu1mSu.jpeg", title: "Entrance" },
-                            { url: "https://images.shiksha.com/mediadata/images/1544158431phptJtX84.jpeg", title: "Activity Center" }
+                            { url: "/gallery/sports_1.jpg", title: "Sports Competition" },
+                            { url: "/gallery/sports_2.jpg", title: "Prize Distribution" },
+                            { url: "/gallery/sports_3.jpg", title: "Sports Team" },
+                            { url: "/gallery/sports_4.jpg", title: "Sports Achievement" },
+                            { url: "/campus_inner.jpg", title: "Main Building" },
+                            { url: "/campus_bg.png", title: "College Campus" }
                         ].map((img, i) => (
                             <div key={i} className="group relative overflow-hidden rounded-xl shadow-md h-64 bg-gray-100">
                                 <img src={img.url} alt={img.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />

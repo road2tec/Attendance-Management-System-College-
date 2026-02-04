@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { api, endpoints } from "@/lib/api";
 import SectionTitle from "@/components/SectionTitle";
-import { IconUsers, IconCheck, IconX, IconClock } from "@tabler/icons-react";
+import { IconUsers, IconCheck, IconX, IconClock, IconScan } from "@tabler/icons-react";
 import {
   LineChart,
   Line,
@@ -68,6 +68,7 @@ export default function AdminDashboardPage() {
     { title: "Present Today", value: stats?.presentToday || 0, icon: IconCheck, color: "text-emerald-600", bg: "bg-emerald-100" },
     { title: "Absent", value: stats?.absentToday || 0, icon: IconX, color: "text-rose-600", bg: "bg-rose-100" },
     { title: "Daily Avg %", value: (stats?.attendancePercentage || 0) + "%", icon: IconClock, color: "text-amber-600", bg: "bg-amber-100" },
+    { title: "Live Monitor", value: "Active", icon: IconScan, color: "text-teal-600", bg: "bg-teal-50", isLink: true, href: "/live-check" },
   ];
 
   // Dummy chart data for demo (backend doesn't fully support historical yet)
@@ -85,15 +86,20 @@ export default function AdminDashboardPage() {
 
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {statCards.map((stat, idx) => (
-          <div key={idx} className="card bg-white shadow-sm hover:shadow-md transition-all border border-base-200">
+        {statCards.map((stat: any, idx) => (
+          <div
+            key={idx}
+            className={`card bg-white shadow-sm hover:shadow-md transition-all border border-base-200 ${stat.isLink ? 'cursor-pointer hover:border-teal-300' : ''}`}
+            onClick={() => stat.isLink && (window.location.href = stat.href)}
+          >
             <div className="card-body flex flex-row items-center gap-4 p-6">
               <div className={`p-3 rounded-full ${stat.bg} ${stat.color}`}>
                 <stat.icon size={28} />
               </div>
               <div>
                 <h3 className="text-gray-500 text-sm font-medium">{stat.title}</h3>
-                <p className="text-3xl font-bold text-gray-800">{stat.value}</p>
+                <p className={`font-bold text-gray-800 ${stat.isLink ? 'text-xl' : 'text-3xl'}`}>{stat.value}</p>
+                {stat.isLink && <span className="text-[10px] text-teal-600 font-bold animate-pulse uppercase">● Live Now</span>}
               </div>
             </div>
           </div>

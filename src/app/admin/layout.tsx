@@ -1,5 +1,5 @@
 "use client";
-import { IconLayoutDashboard, IconUsers, IconLogout, IconShield } from "@tabler/icons-react";
+import { IconLayoutDashboard, IconUsers, IconLogout, IconShield, IconScan } from "@tabler/icons-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAuth, AuthProvider } from "@/context/AuthContext";
@@ -15,8 +15,8 @@ const SidebarLink = ({ href, icon: Icon, label }: any) => {
     <Link
       href={href}
       className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${isActive
-          ? "bg-teal-600 text-white shadow-md shadow-teal-500/20"
-          : "text-gray-600 hover:bg-teal-50 hover:text-teal-700"
+        ? "bg-teal-600 text-white shadow-md shadow-teal-500/20"
+        : "text-gray-600 hover:bg-teal-50 hover:text-teal-700"
         }`}
     >
       <Icon size={20} />
@@ -62,6 +62,7 @@ function AdminShell({ children }: { children: React.ReactNode }) {
         <nav className="flex-1 p-4 space-y-1">
           <SidebarLink href="/admin/dashboard" icon={IconLayoutDashboard} label="Dashboard" />
           <SidebarLink href="/admin/manage-students" icon={IconUsers} label="Students" />
+          <SidebarLink href="/live-check" icon={IconScan} label="Live Monitoring" />
         </nav>
 
         <div className="p-4 border-t border-gray-100">

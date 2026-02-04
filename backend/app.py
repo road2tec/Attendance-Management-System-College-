@@ -277,9 +277,30 @@ class StudentAddRequest(BaseModel):
 async def add_student(student: StudentAddRequest):
     if students_collection.find_one({"rollNo": student.rollNo}):
         raise HTTPException(status_code=400, detail="Student already exists")
+    if students_collection.find_one({"email": student.email}):
+        raise HTTPException(status_code=400, detail="Email already registered")
 
     if not student.images:
         raise HTTPException(status_code=400, detail="No images provided")
+
+    # ---- FACE DEDUPLICATION CHECK (Optional/Experimental) ----
+    if len(known_faces) > 0:
+        for img_b64 in student.images[:2]: # Check first 2 samples for speed
+            try:
+                temp_b64 = img_b64.split(",")[1] if "," in img_b64 else img_b64
+                temp_arr = np.frombuffer(base64.b64decode(temp_b64), np.uint8)
+                temp_img = cv2.imdecode(temp_arr, cv2.IMREAD_COLOR)
+                temp_emb = get_face_embedding(temp_img, silent=True)
+                
+                if temp_emb is not None:
+                    for person in known_faces:
+                        for stored_emb in person.get("embeddings", []):
+                            stored_mat = np.array(stored_emb, dtype=np.float32).reshape((32, 32))
+                            score = cv2.compareHist(temp_emb, stored_mat, cv2.HISTCMP_CORREL)
+                            if score > 0.8: # Very strict match
+                                raise HTTPException(status_code=400, detail=f"Face already registered as {person['name']}")
+            except HTTPException as e: raise e
+            except: continue
 
     embeddings = []
     saved_profile_image = ""
@@ -338,6 +359,17 @@ async def add_student(student: StudentAddRequest):
 
 @app.delete("/students/{id}")
 async def delete_student(id: str):
+    student = students_collection.find_one({"_id": ObjectId(id)})
+    if student:
+        # Delete Profile Image from disk
+        profile_img = student.get("profileImage")
+        if profile_img:
+            filename = os.path.basename(profile_img)
+            filepath = os.path.join(UPLOAD_DIR, filename)
+            if os.path.exists(filepath):
+                try: os.remove(filepath)
+                except: pass
+    
     students_collection.delete_one({"_id": ObjectId(id)})
     load_known_faces() # Reload cache to remove deleted student
     return {"message": "Deleted"}
@@ -373,10 +405,64 @@ async def update_student(id: str, student: StudentUpdateRequest):
     load_known_faces() # Reload cache to update changes (e.g. name)
     return {"message": "Student updated successfully"}
 
-# ==== ATTENDANCE ROUTES ====
+# ==== MODELS ====
 
 class AttendanceRequest(BaseModel):
     image: str
+
+# ==== FACE RECOGNITION (LIVE CHECK) ROUTE ====
+
+@app.post("/face/recognize")
+async def recognize_face(data: AttendanceRequest):
+    """
+    Stand-alone recognition endpoint for 'Live Check' page.
+    Does NOT mark attendance.
+    """
+    if not data.image:
+        raise HTTPException(status_code=400, detail="No image")
+
+    try:
+        encoded = data.image.split(",", 1)[1] if "," in data.image else data.image
+        np_arr = np.frombuffer(base64.b64decode(encoded), np.uint8)
+        img = cv2.imdecode(np_arr, cv2.IMREAD_COLOR)
+
+        if img is None: raise HTTPException(status_code=400, detail="Invalid Image")
+
+        target_emb = get_face_embedding(img, silent=True)
+        if target_emb is None:
+             return {"status": "fail", "message": "No face detected"}
+
+        best_score = 0
+        best_match = None
+        
+        for person in known_faces:
+            local_best = 0
+            for emb_list in person.get("embeddings", []):
+                stored_mat = np.array(emb_list, dtype=np.float32).reshape((32, 32))
+                score = cv2.compareHist(target_emb, stored_mat, cv2.HISTCMP_CORREL)
+                if score > local_best: local_best = score
+            
+            if local_best > best_score:
+                best_score = local_best
+                best_match = person
+
+        if best_match and best_score > SIMILARITY_THRESHOLD:
+            # Fetch full details if needed, but for now just return the name/id
+            return {
+                "status": "success",
+                "student": {
+                    "name": best_match["name"],
+                    "id": best_match["id"],
+                },
+                "score": round(best_score, 2)
+            }
+        
+        return {"status": "fail", "message": "Unknown Student", "score": round(best_score, 2)}
+
+    except Exception as e:
+        print(f"Recognition Error: {e}")
+        return {"status": "error", "message": "Server Error"}
+
 
 @app.post("/attendance/mark")
 async def mark_attendance(data: AttendanceRequest):

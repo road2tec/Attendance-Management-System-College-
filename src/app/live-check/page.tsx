@@ -29,15 +29,16 @@ export default function LiveCheckPage() {
             if (res.data.status === "success") {
                 setMatchResult(res.data.student);
                 setErrorMsg("");
-                // Optional: Pause scanning briefly on success to show result properly
-                // setIsScanning(false); 
-                // setTimeout(() => setIsScanning(true), 3000); 
             } else {
                 setMatchResult(null);
                 if (res.data.message === "Unknown Student") {
                     setErrorMsg("Unknown Student");
+                    // Show alert for unknown person
+                    if (now - lastCheckTime > 5000) { // Throttle alerts to every 5 seconds
+                        window.alert("⚠️ ALERT: Unknown Person Detected! Unauthorized access attempted.");
+                    }
                 } else {
-                    setErrorMsg(""); // Clear if it's just "No face detected" to avoid flickering
+                    setErrorMsg("");
                 }
             }
         } catch (err) {
