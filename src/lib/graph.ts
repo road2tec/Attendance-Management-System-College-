@@ -1,5 +1,5 @@
 
-// Graph Data Structure for S.B. Patil College Campus
+// Graph Data Structure for JSPM's Narhe Technical Campus
 export type NodeId =
     | "MAIN_GATE" | "ADMIN_BUILDING" | "LIBRARY" | "CANTEEN"
     | "COMP_IT_DEPT" | "ENTC_DEPT" | "MECH_CIVIL_DEPT"

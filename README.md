@@ -71,4 +71,4 @@ The system uses an `.env` file for configuration. Ensure the `MONGO_URI` is corr
 The project uses `PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python` to ensure compatibility across different Windows environments. Automated alerts are triggered when unverified individuals are detected.
 
 ---
-Built with ❤️ for SBPCOE.
+Built with ❤️ for JSPM's Narhe Technical Campus, Pune.

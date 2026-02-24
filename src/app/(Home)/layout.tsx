@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <title>VidyaRakshak | S B Patil College of Engineering, Indapur</title>
+        <title>VidyaRakshak | JSPM's Narhe Technical Campus, Pune</title>
         <meta
           name="description"
           content="VidyaRakshak is a real-time smart campus surveillance and guidance system that uses AI and computer vision to track student movements, prevent class bunking, and ensure campus-wide security. It offers voice-guided directions and alert systems for enhanced campus management."

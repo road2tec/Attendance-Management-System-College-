@@ -18,7 +18,7 @@ export default function Home() {
     // College Statistics
     const stats = [
         { label: "Years of Excellence", value: "15+", icon: IconCertificate },
-        { label: "Students Enrolled", value: "3000+", icon: IconUsers },
+        { label: "Students Enrolled", value: "5000+", icon: IconUsers },
         { label: "Qualified Faculty", value: "200+", icon: IconTrophy },
         { label: "Top Recruiters", value: "150+", icon: IconBriefcase },
     ];
@@ -35,17 +35,17 @@ export default function Home() {
         <main className="min-h-screen font-sans text-gray-800 bg-white">
 
             {/* Top Bar (Contact Info) */}
-            <div className="bg-[#9d2222] text-white py-2 px-6 text-sm flex flex-col md:flex-row justify-between items-center z-50 relative">
+            <div className="bg-[#8B1A1A] text-white py-2 px-6 text-sm flex flex-col md:flex-row justify-between items-center z-50 relative">
                 <div className="flex gap-4">
                     <span className="flex items-center gap-1 hover:text-yellow-300 transition-colors cursor-pointer">
-                        <IconPhone size={14} /> +91-2111-225600
+                        <IconPhone size={14} /> +91-8262983871
                     </span>
                     <span className="flex items-center gap-1 hover:text-yellow-300 transition-colors cursor-pointer">
-                        <IconMail size={14} /> principal@sbpcoe.com
+                        <IconMail size={14} /> director@jspmntc.edu.in
                     </span>
                 </div>
                 <div className="flex gap-4 mt-2 md:mt-0 opacity-80 text-xs uppercase tracking-wide">
-                    <span>DTE Code: 6319</span>
+                    <span>DTE Code: 6755</span>
                     <span>|</span>
                     <span>NAAC 'A' Grade</span>
                 </div>
@@ -56,44 +56,44 @@ export default function Home() {
                 <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
                     {/* Logo Section */}
                     <div className="flex items-center gap-3">
-                        <div className="w-12 h-12 bg-[#9d2222] rounded-full flex items-center justify-center text-white font-bold text-xl shadow-md">
-                            SB
+                        <div className="w-12 h-12 bg-[#8B1A1A] rounded-full flex items-center justify-center text-white font-bold text-xl shadow-md">
+                            JSPM
                         </div>
                         <div className="leading-tight">
-                            <h1 className="text-xl font-bold text-[#9d2222] uppercase tracking-tight">S.B. Patil College</h1>
-                            <p className="text-xs text-gray-500 font-medium tracking-widest">OF ENGINEERING, INDAPUR</p>
+                            <h1 className="text-xl font-bold text-[#8B1A1A] uppercase tracking-tight">JSPM's Narhe Technical Campus</h1>
+                            <p className="text-xs text-gray-500 font-medium tracking-widest">NTC, Pune</p>
                         </div>
                     </div>
 
                     {/* Desktop Menu */}
                     <div className="hidden md:flex items-center gap-8 font-medium text-sm text-gray-600">
-                        <Link href="/" className="hover:text-[#9d2222] transition-colors relative group">
+                        <Link href="/" className="hover:text-[#8B1A1A] transition-colors relative group">
                             Home
-                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#9d2222] transition-all group-hover:w-full"></span>
+                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#8B1A1A] transition-all group-hover:w-full"></span>
                         </Link>
-                        <Link href="/about" className="hover:text-[#9d2222] transition-colors relative group">
+                        <Link href="/about" className="hover:text-[#8B1A1A] transition-colors relative group">
                             About Us
-                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#9d2222] transition-all group-hover:w-full"></span>
+                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#8B1A1A] transition-all group-hover:w-full"></span>
                         </Link>
-                        <Link href="/departments" className="hover:text-[#9d2222] transition-colors relative group">
+                        <Link href="/departments" className="hover:text-[#8B1A1A] transition-colors relative group">
                             Departments
-                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#9d2222] transition-all group-hover:w-full"></span>
+                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#8B1A1A] transition-all group-hover:w-full"></span>
                         </Link>
-                        <Link href="/placements" className="hover:text-[#9d2222] transition-colors relative group">
+                        <Link href="/placements" className="hover:text-[#8B1A1A] transition-colors relative group">
                             Placements
-                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#9d2222] transition-all group-hover:w-full"></span>
+                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#8B1A1A] transition-all group-hover:w-full"></span>
                         </Link>
-                        <Link href="/facilities" className="hover:text-[#9d2222] transition-colors relative group">
+                        <Link href="/facilities" className="hover:text-[#8B1A1A] transition-colors relative group">
                             Facilities
-                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#9d2222] transition-all group-hover:w-full"></span>
+                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#8B1A1A] transition-all group-hover:w-full"></span>
                         </Link>
-                        <Link href="/navigation" className="hover:text-[#9d2222] transition-colors relative group font-bold flex items-center gap-1">
+                        <Link href="/navigation" className="hover:text-[#8B1A1A] transition-colors relative group font-bold flex items-center gap-1">
                             <IconMapPin size={16} /> Navigation
-                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#9d2222] transition-all group-hover:w-full"></span>
+                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#8B1A1A] transition-all group-hover:w-full"></span>
                         </Link>
 
                         {/* Login Button */}
-                        <Link href="/login" className="flex items-center gap-2 bg-[#9d2222] text-white px-5 py-2.5 rounded-full hover:bg-[#801b1b] transition-all transform hover:-translate-y-0.5 shadow-md shadow-red-900/10">
+                        <Link href="/login" className="flex items-center gap-2 bg-[#8B1A1A] text-white px-5 py-2.5 rounded-full hover:bg-[#801b1b] transition-all transform hover:-translate-y-0.5 shadow-md shadow-red-900/10">
                             <IconLogin size={18} />
                             <span>Admin Login</span>
                         </Link>
@@ -103,7 +103,7 @@ export default function Home() {
 
             {/* News Ticker */}
             <div className="bg-gray-900 text-white text-xs py-2 overflow-hidden flex items-center shadow-inner relative z-30">
-                <div className="bg-[#9d2222] px-4 py-2 font-bold uppercase tracking-wider absolute left-0 z-10 flex items-center gap-2 h-full shadow-lg">
+                <div className="bg-[#8B1A1A] px-4 py-2 font-bold uppercase tracking-wider absolute left-0 z-10 flex items-center gap-2 h-full shadow-lg">
                     <IconNews size={14} /> Latest News
                 </div>
                 <div className="whitespace-nowrap animate-marquee flex gap-12 pl-40">
@@ -135,11 +135,11 @@ export default function Home() {
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500">Engineering Education</span>
                     </h1>
                     <p className="text-lg text-gray-300 max-w-xl mb-10 leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
-                        Transforming students into industry-ready professionals through innovation, research, and holistic development at S.B. Patil College of Engineering.
+                        Transforming students into industry-ready professionals through innovation, research, and holistic development at JSPM's Narhe Technical Campus.
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up" style={{ animationDelay: '0.7s' }}>
-                        <a href="#vidya-rakshak" className="px-8 py-4 bg-[#9d2222] text-white rounded-lg font-bold hover:bg-[#801b1b] transition-colors flex items-center justify-center gap-2 shadow-lg hover:shadow-red-900/50">
+                        <a href="#vidya-rakshak" className="px-8 py-4 bg-[#8B1A1A] text-white rounded-lg font-bold hover:bg-[#801b1b] transition-colors flex items-center justify-center gap-2 shadow-lg hover:shadow-red-900/50">
                             Smart Campus <IconChevronRight size={18} />
                         </a>
                         <a href="/about" className="px-8 py-4 bg-white/10 backdrop-blur-md text-white border border-white/30 rounded-lg font-bold hover:bg-white/20 transition-colors flex items-center justify-center">
@@ -154,7 +154,7 @@ export default function Home() {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-8 divide-x divide-gray-100">
                     {stats.map((stat, idx) => (
                         <div key={idx} className="flex flex-col items-center text-center group">
-                            <div className="w-12 h-12 bg-red-50 text-[#9d2222] rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                            <div className="w-12 h-12 bg-red-50 text-[#8B1A1A] rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                                 <stat.icon size={24} />
                             </div>
                             <div className="text-3xl font-bold text-gray-800">{stat.value}</div>
@@ -169,7 +169,7 @@ export default function Home() {
                 <div className="max-w-7xl mx-auto px-6 relative z-10">
                     <div className="text-center mb-12">
                         <h2 className="text-3xl font-bold text-gray-900 mb-2">Campus Digital Services</h2>
-                        <div className="w-16 h-1 bg-[#9d2222] mx-auto rounded-full"></div>
+                        <div className="w-16 h-1 bg-[#8B1A1A] mx-auto rounded-full"></div>
                     </div>
 
                     <div className="flex justify-center gap-10 max-w-5xl mx-auto flex-wrap">
@@ -231,12 +231,12 @@ export default function Home() {
                         <div className="md:w-1/3 w-full">
                             <div className="bg-gray-100 rounded-lg p-2 border border-gray-200">
                                 <div className="aspect-[3/4] bg-gray-200 w-full relative overflow-hidden flex items-end justify-center">
-                                    <img src="/principal_real.jpg" alt="Principal Dr. Shrinivas Shirkande" className="w-full h-full object-cover object-top" />
+                                    <img src="/principal_real.jpg" alt="Director Dr. M. M. Sardeshmukh" className="w-full h-full object-cover object-top" />
                                 </div>
                             </div>
                             <div className="mt-4">
-                                <h3 className="text-xl font-bold text-gray-800">Dr. Shrinivas Shirkande</h3>
-                                <p className="text-[#9d2222] font-semibold">Principal</p>
+                                <h3 className="text-xl font-bold text-gray-800">Prof. Dr. T. J. Sawant</h3>
+                                <p className="text-[#8B1A1A] font-semibold">Director, JSPM NTC</p>
                                 <div className="flex gap-2 mt-2">
                                     <div className="w-8 h-8 bg-black text-white flex items-center justify-center text-xs">f</div>
                                     <div className="w-8 h-8 bg-black text-white flex items-center justify-center text-xs">in</div>
@@ -249,10 +249,10 @@ export default function Home() {
                         <div className="md:w-2/3 text-gray-600 leading-relaxed text-lg space-y-6 text-justify">
                             <p className="font-semibold text-gray-800">Dear Stakeholders, <br /> Greetings!</p>
                             <p>
-                                It is with great pride and a deep sense of responsibility that I extend my heartfelt welcome to all our valued stakeholders — students, parents, faculty, alumni, industry partners, and well-wishers — who form the backbone of S. B. Patil College of Engineering.
+                                It is with great pride and a deep sense of responsibility that I extend my heartfelt welcome to all our valued stakeholders — students, parents, faculty, alumni, industry partners, and well-wishers — who form the backbone of JSPM's Narhe Technical Campus.
                             </p>
                             <p>
-                                At SBPCOE, we are committed to creating an environment that nurtures academic excellence, innovation, ethical values, and holistic development. Our mission is to empower students with strong technical knowledge, problem-solving skills, and leadership qualities that will enable them to contribute meaningfully to society and the nation.
+                                At JSPM NTC, we are committed to creating an environment that nurtures academic excellence, innovation, ethical values, and holistic development. Our mission is to empower students with strong technical knowledge, problem-solving skills, and leadership qualities that will enable them to contribute meaningfully to society and the nation.
                             </p>
                             <p>
                                 We believe that education is a collaborative journey. The trust and support of our stakeholders inspire us to continuously evolve, adopt the best educational practices, strengthen our research initiatives, and build strong industry-academia linkages. Together, we work towards shaping not just engineers, but responsible citizens and future leaders who will drive global progress.
@@ -266,15 +266,15 @@ export default function Home() {
             <footer className="bg-[#1a1a1a] text-white pt-16 pb-8 border-t-4 border-yellow-500">
                 <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-12 mb-12">
                     <div className="col-span-1 md:col-span-2">
-                        <h4 className="text-2xl font-bold mb-6">S.B. Patil College of Engineering</h4>
+                        <h4 className="text-2xl font-bold mb-6">JSPM's Narhe Technical Campus</h4>
                         <p className="text-gray-400 leading-relaxed mb-6 max-w-sm">
                             Established with a vision to provide world-class technical education. We strive to create future leaders who contribute to society through innovation.
                         </p>
                         <div className="flex gap-4">
                             {/* Social Icons Placeholder */}
-                            <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#9d2222] transition-colors cursor-pointer">FB</div>
-                            <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#9d2222] transition-colors cursor-pointer">TW</div>
-                            <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#9d2222] transition-colors cursor-pointer">LI</div>
+                            <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#8B1A1A] transition-colors cursor-pointer">FB</div>
+                            <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#8B1A1A] transition-colors cursor-pointer">TW</div>
+                            <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#8B1A1A] transition-colors cursor-pointer">LI</div>
                         </div>
                     </div>
 
@@ -293,23 +293,23 @@ export default function Home() {
                         <h4 className="text-lg font-bold mb-6 text-yellow-500">Contact Info</h4>
                         <ul className="space-y-4 text-gray-400">
                             <li className="flex gap-3">
-                                <IconMapPin className="shrink-0 text-[#9d2222]" />
-                                Vangali, Indapur, Dist: Pune - 413106
+                                <IconMapPin className="shrink-0 text-[#8B1A1A]" />
+                                S No. 12-1-2 & 12-2-2, Narhe, Taluka-Haveli, Near Sanas Crane, Pune-Bangalore Highway, Pune - 411041. Landmark: Navale Bridge.
                             </li>
                             <li className="flex gap-3">
-                                <IconPhone className="shrink-0 text-[#9d2222]" />
-                                +91-2111-225600
+                                <IconPhone className="shrink-0 text-[#8B1A1A]" />
+                                +91-8262983871
                             </li>
                             <li className="flex gap-3">
-                                <IconMail className="shrink-0 text-[#9d2222]" />
-                                principal@sbpcoe.com
+                                <IconMail className="shrink-0 text-[#8B1A1A]" />
+                                director@jspmntc.edu.in
                             </li>
                         </ul>
                     </div>
                 </div>
 
                 <div className="max-w-7xl mx-auto px-6 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
-                    <p>© 2026 S.B. Patil College of Engineering. All Rights Reserved.</p>
+                    <p>© 2026 JSPM's Narhe Technical Campus. All Rights Reserved.</p>
                     <p>Vidya Rakshak System by <span className="text-white">Smart Coders</span></p>
                 </div>
             </footer>

@@ -59,7 +59,7 @@ export default function LoginPage() {
             console.error("Login Error:", err);
 
             // Demo Fallback for Admin
-            if (loginMode === 'admin' && (email === "admin@vidya.com" || email === "admin@sbpcoe.ac.in") && password === "admin123") {
+            if (loginMode === 'admin' && (email === "admin@vidya.com" || email === "admin@jspm.edu.in") && password === "admin123") {
                 toast.success("Login Successful (Demo Admin)!");
                 login({ name: "Admin User", email: email, role: "admin", profileImage: "" } as any);
             }
@@ -87,25 +87,24 @@ export default function LoginPage() {
     return (
         <div className="min-h-screen flex flex-col md:flex-row font-sans">
             {/* Left Side: College Info */}
-            <div className="md:w-[35%] bg-[#9d2222] text-white p-8 flex flex-col items-center justify-center text-center relative overflow-hidden">
+            <div className="md:w-[35%] bg-[#8B1A1A] text-white p-8 flex flex-col items-center justify-center text-center relative overflow-hidden">
                 {/* Logo Placeholder */}
-                <div className="w-32 h-32 bg-white rounded-full flex items-center justify-center mb-6 shadow-lg">
-                    {/* Img would go here */}
-                    <span className="text-[#9d2222] text-4xl font-bold">SBP</span>
+                <div className="w-32 h-32 bg-white rounded-full flex items-center justify-center mb-6 shadow-lg text-center p-2">
+                    <span className="text-[#8B1A1A] text-2xl font-bold leading-none">JSPM NTC</span>
                 </div>
 
-                <p className="uppercase tracking-widest text-sm mb-2 opacity-80">Shahajirao Patil Vikas Pratishthan&apos;s</p>
+                <p className="uppercase tracking-widest text-sm mb-2 opacity-80">Jayawant Shikshan Prasarak Mandal&apos;s</p>
                 <h1 className="text-3xl font-bold mb-4 leading-tight">
-                    S B Patil College of <br /> Engineering, Indapur
+                    JSPM's Narhe Technical <br /> Campus, Pune
                 </h1>
                 <p className="text-sm opacity-80 mb-6 max-w-sm">
-                    Vangali Indapur Tal:Indapur Dist:Pune - 413106 (India)
+                    S No. 12-1-2 & 12-2-2, Narhe, Near Navale Bridge, Pune-Bangalore Highway, Pune - 411041
                 </p>
 
                 <div className="text-xs space-y-1 opacity-70 border-t border-white/20 pt-6 mt-2 w-full max-w-xs">
                     <p>Approved by AICTE New Delhi, Affiliated to Savitribai Phule Pune University (SPPU)</p>
-                    <p>Recognised by Govt. of Maharashtra, MSBTE, DTE Mumbai.</p>
-                    <p className="font-semibold text-yellow-300">DTE Code 06319, NAAC : A Grade, ISO 9001: 2015</p>
+                    <p>Recognised by Govt. of Maharashtra, DTE Mumbai.</p>
+                    <p className="font-semibold text-yellow-300">DTE Code 6755 | NAAC : A Grade | NBA Accredited | ISO 9001: 2015</p>
                 </div>
             </div>
 

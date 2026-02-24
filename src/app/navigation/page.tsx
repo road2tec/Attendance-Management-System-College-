@@ -32,11 +32,11 @@ export default function NavigationPage() {
         <div className="min-h-screen bg-gray-100 font-sans text-gray-800 flex flex-col">
             {/* Header */}
             <header className="bg-white shadow-sm py-4 px-6 flex justify-between items-center z-20">
-                <div className="flex items-center gap-2 text-[#9d2222]">
+                <div className="flex items-center gap-2 text-[#8B1A1A]">
                     <IconNavigation size={32} />
                     <h1 className="text-2xl font-bold tracking-tight">CampusNav</h1>
                 </div>
-                <a href="/" className="text-sm font-medium text-gray-500 hover:text-[#9d2222]">Exit Navigation</a>
+                <a href="/" className="text-sm font-medium text-gray-500 hover:text-[#8B1A1A]">Exit Navigation</a>
             </header>
 
             <div className="flex-1 relative overflow-hidden flex flex-col md:flex-row">

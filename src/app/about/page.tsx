@@ -2,7 +2,7 @@ export default function AboutPage() {
     return (
         <div className="min-h-screen bg-white font-sans text-gray-800">
             {/* Header / Hero */}
-            <div className="bg-[#9d2222] text-white py-16 px-6 text-center">
+            <div className="bg-[#8B1A1A] text-white py-16 px-6 text-center">
                 <h1 className="text-4xl font-bold mb-4 uppercase tracking-wide">About Us</h1>
                 <p className="opacity-80 max-w-2xl mx-auto">
                     Dedicated to excellence in technical education since 2009.
@@ -15,10 +15,10 @@ export default function AboutPage() {
                 {/* Introduction */}
                 <section className="grid md:grid-cols-2 gap-12 items-center">
                     <div>
-                        <h2 className="text-2xl font-bold text-[#9d2222] mb-4">Our Legacy</h2>
+                        <h2 className="text-2xl font-bold text-[#8B1A1A] mb-4">Our Legacy</h2>
                         <p className="text-gray-600 leading-relaxed mb-4">
-                            S.B. Patil College of Engineering was established in 2009 by the Shahajirao Patil Vikas Pratishthan.
-                            Located in the lush green campus of Indapur, we are committed to producing high-quality engineers who can compete globally.
+                            JSPM's Narhe Technical Campus (NTC) was established in 2011 by the Jayawant Shikshan Prasarak Mandal (JSPM).
+                            Located in the rapidly developing area of Narhe, Pune, we are committed to producing high-quality engineers and managers who can compete globally.
                         </p>
                         <p className="text-gray-600 leading-relaxed">
                             Our institute is approved by AICTE, New Delhi, recognized by the Government of Maharashtra, and affiliated with Savitribai Phule Pune University (SPPU).
@@ -42,7 +42,7 @@ export default function AboutPage() {
                             "To serve the society, industry and all stakeholders through value-added quality education and create competent and professional engineers."
                         </p>
                     </div>
-                    <div className="bg-gray-50 p-8 rounded-xl border-l-4 border-[#9d2222] shadow-sm">
+                    <div className="bg-gray-50 p-8 rounded-xl border-l-4 border-[#8B1A1A] shadow-sm">
                         <h3 className="text-xl font-bold text-gray-800 mb-4">Our Mission</h3>
                         <ul className="list-disc list-inside text-gray-600 space-y-2">
                             <li>To provide state-of-the-art infrastructure and facilities.</li>
@@ -53,18 +53,18 @@ export default function AboutPage() {
                 </section>
 
                 {/* Principal's Desk */}
-                <section className="bg-[#9d2222] text-white p-10 rounded-2xl shadow-xl">
+                <section className="bg-[#8B1A1A] text-white p-10 rounded-2xl shadow-xl">
                     <div className="flex flex-col md:flex-row gap-8 items-center">
                         <div className="w-32 h-32 bg-gray-300 rounded-full border-4 border-white shrink-0 overflow-hidden">
-                            <img src="/principal_real.jpg" alt="Principal Dr. Shrinivas Shirkande" className="w-full h-full object-cover" />
+                            <img src="/principal_real.jpg" alt="Director Prof. Dr. T. J. Sawant" className="w-full h-full object-cover" />
                         </div>
                         <div>
-                            <h3 className="text-2xl font-bold mb-2">From the Principal's Desk</h3>
+                            <h3 className="text-2xl font-bold mb-2">From the Director's Desk</h3>
                             <p className="opacity-90 leading-relaxed mb-4">
-                                "We believe in holistic development. Education is not just about syllabus, but about building character and capability. S.B. Patil College provides the perfect ecosystem for this growth."
+                                "We believe in holistic development. Education is not just about syllabus, but about building character and capability. JSPM NTC provides the perfect ecosystem for this growth."
                             </p>
-                            <p className="font-bold text-yellow-300">– Dr. Shrinivas Shirkande</p>
-                            <p className="text-xs opacity-70">Principal, SBPCOE</p>
+                            <p className="font-bold text-yellow-300">– Prof. Dr. T. J. Sawant</p>
+                            <p className="text-xs opacity-70">Director, JSPM NTC</p>
                         </div>
                     </div>
                 </section>
@@ -74,12 +74,12 @@ export default function AboutPage() {
                     <h2 className="text-3xl font-bold text-center text-gray-800 mb-10">Campus Gallery & Sports</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                         {[
-                            { url: "/gallery/sports_1.jpg", title: "Sports Competition" },
-                            { url: "/gallery/sports_2.jpg", title: "Prize Distribution" },
-                            { url: "/gallery/sports_3.jpg", title: "Sports Team" },
-                            { url: "/gallery/sports_4.jpg", title: "Sports Achievement" },
-                            { url: "/campus_inner.jpg", title: "Main Building" },
-                            { url: "/campus_bg.png", title: "College Campus" }
+                            { url: "/gallery/jspm_campus_1.jpg", title: "Main Campus Building" },
+                            { url: "/gallery/jspm_campus_2.jpg", title: "NTC Infrastructure" },
+                            { url: "/gallery/jspm_campus_3.jpg", title: "College View" },
+                            { url: "/gallery/sports_1.jpg", title: "Sports Event" },
+                            { url: "/gallery/sports_2.jpg", title: "Cultural Gathering" },
+                            { url: "/gallery/sports_3.jpg", title: "MESA Event" }
                         ].map((img, i) => (
                             <div key={i} className="group relative overflow-hidden rounded-xl shadow-md h-64 bg-gray-100">
                                 <img src={img.url} alt={img.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
@@ -96,7 +96,7 @@ export default function AboutPage() {
                     <h2 className="text-3xl font-bold text-center text-gray-800 mb-10">Locate Us</h2>
                     <div className="w-full h-96 rounded-2xl overflow-hidden shadow-lg border border-gray-200">
                         <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3791.267327318898!2d74.9658253148281!3d18.15174598762516!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc37452da679697%3A0xc363402cf3c9c9!2sS.B.Patil%20College%20Of%20Engineering%2C%20Indapur!5e0!3m2!1sen!2sin!4v1625642642234!5m2!1sen!2sin"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15136.425827318898!2d73.8158253148281!3d18.45174598762516!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc29452da679697%3A0xc363402cf3c9c9!2sJSPM%20Narhe%20Technical%20Campus%2C%20Pune!5e0!3m2!1sen!2sin!4v1625642642234!5m2!1sen!2sin"
                             width="100%"
                             height="100%"
                             style={{ border: 0 }}

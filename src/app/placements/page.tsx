@@ -1,7 +1,7 @@
 export default function PlacementsPage() {
     return (
         <div className="min-h-screen bg-gray-50 font-sans text-gray-800">
-            <div className="bg-[#9d2222] text-white py-16 px-6 text-center">
+            <div className="bg-[#8B1A1A] text-white py-16 px-6 text-center">
                 <h1 className="text-4xl font-bold mb-4 uppercase tracking-wide">Training & Placement</h1>
                 <p className="opacity-80 max-w-2xl mx-auto">
                     Bridging the gap between Campus and Corporate.
@@ -14,7 +14,7 @@ export default function PlacementsPage() {
                 {/* Stats */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                     <div className="bg-white p-6 rounded-xl shadow-sm text-center">
-                        <div className="text-4xl font-bold text-[#9d2222] mb-1">200+</div>
+                        <div className="text-4xl font-bold text-[#8B1A1A] mb-1">200+</div>
                         <div className="text-xs uppercase font-bold text-gray-400">Companies Visited</div>
                     </div>
                     <div className="bg-white p-6 rounded-xl shadow-sm text-center">

@@ -59,15 +59,15 @@ export default function HomePage() {
     <div className="grid grid-cols-12 min-h-screen">
       {/* Left Panel (3 columns) */}
       <div className="col-span-12 md:col-span-4 bg-[#a12421] text-white p-8 hidden md:flex flex-col justify-center items-center">
-        <img src="logo.png" alt="SB Patil College Logo" />
-        <span className="text-2xl font-extralight">
-          Shahajirao Patil Vikas Pratishthan's
+        <img src="logo.png" alt="JSPM NTC Logo" />
+        <span className="text-2xl font-extralight text-center">
+          Jayawant Shikshan Prasarak Mandal's
         </span>
-        <h1 className="text-4xl font-bold mt-4 text-center text-shadow-lg">
-          S B Patil College of Engineering, Indapur
+        <h1 className="text-4xl font-bold mt-4 text-center text-shadow-lg uppercase">
+          JSPM's Narhe Technical Campus, Pune
         </h1>
         <p className="mt-2 text-center text-lg">
-          Vangali Indapur Tal:Indapur Dist:Pune - 413106 (India)
+          S. No. 12/1/2 & 12/2, Near-Westernly Bypass Road, Narhe, Pune - 411041
           <br />
           <span className="mt-2 text-center text-base">
             <strong>
@@ -76,8 +76,8 @@ export default function HomePage() {
             </strong>
             <br />
             <strong>
-              Recognised by Govt. of Maharashtra, MSBTE, DTE Mumbai. DTE Code
-              06319, NAAC : A Grade, ISO 9001: 2015
+              Recognised by Govt. of Maharashtra, DTE Mumbai. DTE Code
+              6755, NAAC : A Grade, ISO 9001: 2015
             </strong>
           </span>
         </p>
