@@ -21,17 +21,17 @@ from bson import ObjectId
 from dotenv import load_dotenv
 
 load_dotenv()
+# ==== CONFIG ====
+UPLOAD_DIR = "public/uploads"
+os.makedirs(UPLOAD_DIR, exist_ok=True)
+STUDENT_IMAGES_DIR = "backend/Student_Images"
+
 app = FastAPI()
 
 # Mount public directory for uploads
-app.mount("/uploads", StaticFiles(directory="public/uploads"), name="uploads")
+app.mount("/uploads", StaticFiles(directory=UPLOAD_DIR), name="uploads")
 
 from .database import students_collection, attendance_collection, admin_collection, MONGO_URI
-
-# ==== CONFIG ====
-STUDENT_IMAGES_DIR = "backend/Student_Images"
-UPLOAD_DIR = "public/uploads"
-os.makedirs(UPLOAD_DIR, exist_ok=True)
 SIMILARITY_THRESHOLD = 0.45 
 
 # ==== MEDIAPIPE LAZY SETUP ====
