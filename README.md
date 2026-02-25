@@ -1,74 +1,54 @@
-# Vidya Rakshak - AI-Powered Attendance System 🎓🛡️
+# JSPM's NTC - AI-Powered Attendance System 🎓🛡️
 
-Vidya Rakshak is a modern, AI-driven attendance management system designed for educational institutions. It uses face recognition technology to automate attendance tracking and provide real-time monitoring and analytics.
+**JSPM's Narhe Technical Campus - Attendance Management System** is a modern, AI-driven platform designed for automated student tracking. It utilizes face recognition technology (MediaPipe) to provide seamless attendance and real-time monitoring.
 
 ## 🚀 Features
-- **Face Recognition Attendance**: Automated marking via webcam (Threshold 0.45).
-- **Security Alerts**: Real-time alerts for unknown person detection during live monitoring.
-- **Dual Dashboards**: Dedicated interfaces for both Admin (Overview & Management) and Students (History & Profile).
-- **Live Updates**: Real-time polling for instant attendance visibility on both dashboards.
-- **Indoor Navigation**: Graph-based shortest path finder (Dijkstra's Algo) with interactive map visualization.
-- **Robust Backend**: FastAPI server with MongoDB and MediaPipe integration.
-- **Modern UI**: Clean, responsive frontend built with Next.js 15, DaisyUI, and Tailwind CSS.
-- **Campus Gallery**: Integrated gallery for campus and sports events.
+- **Face Recognition Attendance**: Automated marking via webcam (Optimized Threshold: 0.45).
+- **Security Alerts**: Real-time unknown person detection alerts.
+- **Dual Dashboards**: Dedicated Admin and Student interfaces for comprehensive management.
+- **Smart Charts**: Visual analytics for daily and weekly attendance trends.
+- **Modern UI**: Built with Next.js 15, Tailwind CSS, and DaisyUI for a premium experience.
 
 ## 📁 Project Structure
-- `/src`: Frontend application (Next.js 15).
-- `/backend`: Core logic, API routes, and AI models.
-- `/public/gallery`: Institutional and event photos.
+- `/src`: Next.js 15 Frontend.
+- `/backend`: FastAPI (Python) server & AI logic.
 - `/public/uploads`: Storage for student profile photos.
-- `start_backend.bat`: Launches the FastAPI server (Port 8001).
-- `DEMO_SCRIPT.md`: Step-by-step guide for project demonstration.
+- `.env`: Global environment configuration.
 
-## 🛠️ Setup Instructions
+## 🛠️ Setup & Run
 
-### Prerequisites
+### 1. Prerequisites
 - Python 3.11+
-- Node.js 18+
+- Node.js 20+
 - MongoDB (Running on `localhost:27017`)
 
-### 1. Backend Setup
-Navigate to the root directory and run:
-```bash
+### 2. Backend Installation & Start
+From the **root folder**, run:
+```powershell
+# Install dependencies
 pip install -r backend/requirements.txt
-```
-> [!NOTE]
-> We use `protobuf==3.20.3` to ensure compatibility with MediaPipe in Windows environments.
 
-### 2. Frontend Setup
-Navigate to the root directory and run:
-```bash
+# Start the server (Port 8001)
+python -m uvicorn backend.app:app --reload --port 8001
+```
+
+### 3. Frontend Installation & Start
+From the **root folder**, run:
+```powershell
+# Install dependencies
 npm install
-```
 
-### 3. Running the Project
-
-#### **Option A: Automated Start (Recommended)**
-Run the batch files provided in the root directory:
-1. Run `.\start_backend.bat` to start the FastAPI server.
-2. In a separate terminal, run `npm run dev` to start the Next.js frontend.
-
-#### **Option B: Manual Start**
-**Backend:**
-```bash
-cd backend
-python -m uvicorn app:app --reload --port 8001
-```
-
-**Frontend:**
-```bash
+# Start the application (Port 3000)
 npm run dev
 ```
 
-### 4. Accessing the System
-- **Frontend**: [http://localhost:3000](http://localhost:3000)
-- **Backend API Docs**: [http://localhost:8001/docs](http://localhost:8001/docs)
+## 🔒 Default Credentials
+Access the Admin Dashboard using:
+- **Email**: `admin@jspmntc.edu.in`
+- **Password**: `Admin@123`
 
 ## ⚙️ Configuration
-The system uses an `.env` file for configuration. Ensure the `MONGO_URI` is correctly set to your MongoDB instance.
-
-## 🔒 Security
-The project uses `PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python` to ensure compatibility across different Windows environments. Automated alerts are triggered when unverified individuals are detected.
+The system uses an `.env` file. Ensure `MONGO_URI` is correctly set. The API is configured to use `127.0.0.1:8001` for maximum compatibility on Windows.
 
 ---
-Built with ❤️ for JSPM's Narhe Technical Campus, Pune.
+Developed for **JSPM's Narhe Technical Campus, Pune**.
