@@ -9,18 +9,18 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "next": "15.5.4",
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
-    "react-hot-toast": "^2.6.0",
-    "react-webcam": "^7.2.0",
-    "recharts": "^3.2.1",
+    "@tabler/icons-react": "^3.35.0",
     "axios": "^1.12.2",
     "bcryptjs": "^3.0.2",
     "daisyui": "^5.1.18",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.18.2",
-    "@tabler/icons-react": "^3.35.0"
+    "next": "15.5.4",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-hot-toast": "^2.6.0",
+    "react-webcam": "^7.2.0",
+    "recharts": "^3.2.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -29,6 +29,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/use-sync-external-store": "^1.5.0",
     "eslint": "^9",
     "eslint-config-next": "15.5.4",
     "tailwindcss": "^4",

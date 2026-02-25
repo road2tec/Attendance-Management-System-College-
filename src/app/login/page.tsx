@@ -59,7 +59,7 @@ export default function LoginPage() {
             console.error("Login Error:", err);
 
             // Demo Fallback for Admin
-            if (loginMode === 'admin' && (email === "admin@vidya.com" || email === "admin@jspm.edu.in") && password === "admin123") {
+            if (loginMode === 'admin' && email === "admin@jspmntc.edu.in" && password === "Admin@123") {
                 toast.success("Login Successful (Demo Admin)!");
                 login({ name: "Admin User", email: email, role: "admin", profileImage: "" } as any);
             }
@@ -147,7 +147,7 @@ export default function LoginPage() {
                                 </label>
                                 <input
                                     type="email"
-                                    placeholder={loginMode === 'admin' ? "admin@vidya.com" : "student@example.com"}
+                                    placeholder={loginMode === 'admin' ? "admin@jspmntc.edu.in" : "student@example.com"}
                                     className="input input-bordered w-full bg-gray-50 focus:border-teal-500 focus:bg-white transition-colors"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
