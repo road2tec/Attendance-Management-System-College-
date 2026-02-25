@@ -283,24 +283,24 @@ async def add_student(student: StudentAddRequest):
     if not student.images:
         raise HTTPException(status_code=400, detail="No images provided")
 
-    # ---- FACE DEDUPLICATION CHECK (Optional/Experimental) ----
-    if len(known_faces) > 0:
-        for img_b64 in student.images[:2]: # Check first 2 samples for speed
-            try:
-                temp_b64 = img_b64.split(",")[1] if "," in img_b64 else img_b64
-                temp_arr = np.frombuffer(base64.b64decode(temp_b64), np.uint8)
-                temp_img = cv2.imdecode(temp_arr, cv2.IMREAD_COLOR)
-                temp_emb = get_face_embedding(temp_img, silent=True)
-                
-                if temp_emb is not None:
-                    for person in known_faces:
-                        for stored_emb in person.get("embeddings", []):
-                            stored_mat = np.array(stored_emb, dtype=np.float32).reshape((32, 32))
-                            score = cv2.compareHist(temp_emb, stored_mat, cv2.HISTCMP_CORREL)
-                            if score > 0.8: # Very strict match
-                                raise HTTPException(status_code=400, detail=f"Face already registered as {person['name']}")
-            except HTTPException as e: raise e
-            except: continue
+    # ---- FACE DEDUPLICATION CHECK (Disabled for compatibility) ----
+    # if len(known_faces) > 0:
+    #     for img_b64 in student.images[:2]: # Check first 2 samples for speed
+    #         try:
+    #             temp_b64 = img_b64.split(",")[1] if "," in img_b64 else img_b64
+    #             temp_arr = np.frombuffer(base64.b64decode(temp_b64), np.uint8)
+    #             temp_img = cv2.imdecode(temp_arr, cv2.IMREAD_COLOR)
+    #             temp_emb = get_face_embedding(temp_img, silent=True)
+    #             
+    #             if temp_emb is not None:
+    #                 for person in known_faces:
+    #                     for stored_emb in person.get("embeddings", []):
+    #                         stored_mat = np.array(stored_emb, dtype=np.float32).reshape((32, 32))
+    #                         score = cv2.compareHist(temp_emb, stored_mat, cv2.HISTCMP_CORREL)
+    #                         if score > 0.8: # Very strict match
+    #                             raise HTTPException(status_code=400, detail=f"Face already registered as {person['name']}")
+    #         except HTTPException as e: raise e
+    #         except: continue
 
     embeddings = []
     saved_profile_image = ""
