@@ -131,7 +131,7 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
                   </div>
                   <hr className="w-full border border-base-content hidden lg:block" />
                   <span className="text-sm text-base-content/70 hidden lg:block">
-                    JSPM's Narhe Technical Campus, Pune
+                    Sinhgad College Of Engineering, Pune
                   </span>
                 </div>
               </Link>

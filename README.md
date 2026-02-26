@@ -1,6 +1,6 @@
-# JSPM's NTC - AI-Powered Attendance System 🎓🛡️
+# SCOE - AI-Powered Attendance System 🎓🛡️
 
-**JSPM's Narhe Technical Campus - Attendance Management System** is a modern, AI-driven platform designed for automated student tracking. It utilizes face recognition technology (MediaPipe) to provide seamless attendance and real-time monitoring.
+**Sinhgad College Of Engineering - Attendance Management System** is a modern, AI-driven platform designed for automated student tracking. It utilizes face recognition technology (MediaPipe) to provide seamless attendance and real-time monitoring.
 
 ## 🚀 Features
 - **Face Recognition Attendance**: Automated marking via webcam (Optimized Threshold: 0.45).
@@ -31,7 +31,6 @@ pip install -r backend/requirements.txt
 # Start the server (Port 8001)
 python -m uvicorn backend.app:app --reload --port 8001
 ```
-
 ### 3. Frontend Installation & Start
 From the **root folder**, run:
 ```powershell
@@ -51,4 +50,4 @@ Access the Admin Dashboard using:
 The system uses an `.env` file. Ensure `MONGO_URI` is correctly set. The API is configured to use `127.0.0.1:8001` for maximum compatibility on Windows.
 
 ---
-Developed for **JSPM's Narhe Technical Campus, Pune**.
+Developed for **Sinhgad College Of Engineering, Pune**.

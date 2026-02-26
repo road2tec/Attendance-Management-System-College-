@@ -180,7 +180,7 @@ class LoginRequest(BaseModel):
 @app.post("/admin/login")
 async def login(data: LoginRequest):
     # For demo, allow hardcoded or any existing db admin
-    if (data.email == "admin@jspmntc.edu.in" or data.email == "admin@vidya.com") and data.password == "Admin@123":
+    if (data.email == "admin@sinhgad.edu" or data.email == "admin@vidya.com") and data.password == "Admin@123":
         return {"user": {"name": "Administrator", "email": data.email, "role": "admin"}}
     
     admin = admin_collection.find_one({"email": data.email, "password": data.password})

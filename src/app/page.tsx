@@ -41,7 +41,7 @@ export default function Home() {
                         <IconPhone size={14} /> +91-8262983871
                     </span>
                     <span className="flex items-center gap-1 hover:text-yellow-300 transition-colors cursor-pointer">
-                        <IconMail size={14} /> director@jspmntc.edu.in
+                        <IconMail size={14} /> principal.scoe@sinhgad.edu
                     </span>
                 </div>
                 <div className="flex gap-4 mt-2 md:mt-0 opacity-80 text-xs uppercase tracking-wide">
@@ -57,10 +57,10 @@ export default function Home() {
                     {/* Logo Section */}
                     <div className="flex items-center gap-3">
                         <div className="w-12 h-12 bg-[#8B1A1A] rounded-full flex items-center justify-center text-white font-bold text-xl shadow-md">
-                            JSPM
+                            SCOE
                         </div>
                         <div className="leading-tight">
-                            <h1 className="text-xl font-bold text-[#8B1A1A] uppercase tracking-tight">JSPM's Narhe Technical Campus</h1>
+                            <h1 className="text-xl font-bold text-[#1A365D] uppercase tracking-tight">Sinhgad College Of Engineering</h1>
                             <p className="text-xs text-gray-500 font-medium tracking-widest">NTC, Pune</p>
                         </div>
                     </div>
@@ -135,7 +135,7 @@ export default function Home() {
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500">Engineering Education</span>
                     </h1>
                     <p className="text-lg text-gray-300 max-w-xl mb-10 leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
-                        Transforming students into industry-ready professionals through innovation, research, and holistic development at JSPM's Narhe Technical Campus.
+                        Transforming students into industry-ready professionals through innovation, research, and holistic development at Sinhgad College Of Engineering.
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up" style={{ animationDelay: '0.7s' }}>
@@ -236,7 +236,7 @@ export default function Home() {
                             </div>
                             <div className="mt-4">
                                 <h3 className="text-xl font-bold text-gray-800">Prof. Dr. T. J. Sawant</h3>
-                                <p className="text-[#8B1A1A] font-semibold">Director, JSPM NTC</p>
+                                <p className="text-[#1A365D] font-semibold">Principal, SCOE</p>
                                 <div className="flex gap-2 mt-2">
                                     <div className="w-8 h-8 bg-black text-white flex items-center justify-center text-xs">f</div>
                                     <div className="w-8 h-8 bg-black text-white flex items-center justify-center text-xs">in</div>
@@ -249,10 +249,10 @@ export default function Home() {
                         <div className="md:w-2/3 text-gray-600 leading-relaxed text-lg space-y-6 text-justify">
                             <p className="font-semibold text-gray-800">Dear Stakeholders, <br /> Greetings!</p>
                             <p>
-                                It is with great pride and a deep sense of responsibility that I extend my heartfelt welcome to all our valued stakeholders — students, parents, faculty, alumni, industry partners, and well-wishers — who form the backbone of JSPM's Narhe Technical Campus.
+                                It is with great pride and a deep sense of responsibility that I extend my heartfelt welcome to all our valued stakeholders — students, parents, faculty, alumni, industry partners, and well-wishers — who form the backbone of Sinhgad College Of Engineering.
                             </p>
                             <p>
-                                At JSPM NTC, we are committed to creating an environment that nurtures academic excellence, innovation, ethical values, and holistic development. Our mission is to empower students with strong technical knowledge, problem-solving skills, and leadership qualities that will enable them to contribute meaningfully to society and the nation.
+                                At SCOE, we are committed to creating an environment that nurtures academic excellence, innovation, ethical values, and holistic development. Our mission is to empower students with strong technical knowledge, problem-solving skills, and leadership qualities that will enable them to contribute meaningfully to society and the nation.
                             </p>
                             <p>
                                 We believe that education is a collaborative journey. The trust and support of our stakeholders inspire us to continuously evolve, adopt the best educational practices, strengthen our research initiatives, and build strong industry-academia linkages. Together, we work towards shaping not just engineers, but responsible citizens and future leaders who will drive global progress.
@@ -266,7 +266,7 @@ export default function Home() {
             <footer className="bg-[#1a1a1a] text-white pt-16 pb-8 border-t-4 border-yellow-500">
                 <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-12 mb-12">
                     <div className="col-span-1 md:col-span-2">
-                        <h4 className="text-2xl font-bold mb-6">JSPM's Narhe Technical Campus</h4>
+                        <h4 className="text-2xl font-bold mb-6">Sinhgad College Of Engineering</h4>
                         <p className="text-gray-400 leading-relaxed mb-6 max-w-sm">
                             Established with a vision to provide world-class technical education. We strive to create future leaders who contribute to society through innovation.
                         </p>
@@ -302,14 +302,14 @@ export default function Home() {
                             </li>
                             <li className="flex gap-3">
                                 <IconMail className="shrink-0 text-[#8B1A1A]" />
-                                director@jspmntc.edu.in
+                                principal.scoe@sinhgad.edu
                             </li>
                         </ul>
                     </div>
                 </div>
 
                 <div className="max-w-7xl mx-auto px-6 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
-                    <p>© 2026 JSPM's Narhe Technical Campus. All Rights Reserved.</p>
+                    <p>© 2026 Sinhgad College Of Engineering. All Rights Reserved.</p>
                     <p>Vidya Rakshak System by <span className="text-white">Smart Coders</span></p>
                 </div>
             </footer>

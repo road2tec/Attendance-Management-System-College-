@@ -59,7 +59,7 @@ export default function LoginPage() {
             console.error("Login Error:", err);
 
             // Demo Fallback for Admin
-            if (loginMode === 'admin' && email === "admin@jspmntc.edu.in" && password === "Admin@123") {
+            if (loginMode === 'admin' && email === "admin@sinhgad.edu" && password === "Admin@123") {
                 toast.success("Login Successful (Demo Admin)!");
                 login({ name: "Admin User", email: email, role: "admin", profileImage: "" } as any);
             }
@@ -90,12 +90,12 @@ export default function LoginPage() {
             <div className="md:w-[35%] bg-[#8B1A1A] text-white p-8 flex flex-col items-center justify-center text-center relative overflow-hidden">
                 {/* Logo Placeholder */}
                 <div className="w-32 h-32 bg-white rounded-full flex items-center justify-center mb-6 shadow-lg text-center p-2">
-                    <span className="text-[#8B1A1A] text-2xl font-bold leading-none">JSPM NTC</span>
+                    <span className="text-[#1A365D] text-2xl font-bold leading-none">SCOE PUNE</span>
                 </div>
 
                 <p className="uppercase tracking-widest text-sm mb-2 opacity-80">Jayawant Shikshan Prasarak Mandal&apos;s</p>
                 <h1 className="text-3xl font-bold mb-4 leading-tight">
-                    JSPM's Narhe Technical <br /> Campus, Pune
+                    Sinhgad College Of <br /> Engineering, Pune
                 </h1>
                 <p className="text-sm opacity-80 mb-6 max-w-sm">
                     S No. 12-1-2 & 12-2-2, Narhe, Near Navale Bridge, Pune-Bangalore Highway, Pune - 411041
@@ -147,7 +147,7 @@ export default function LoginPage() {
                                 </label>
                                 <input
                                     type="email"
-                                    placeholder={loginMode === 'admin' ? "admin@jspmntc.edu.in" : "student@example.com"}
+                                    placeholder={loginMode === 'admin' ? "admin@sinhgad.edu" : "student@example.com"}
                                     className="input input-bordered w-full bg-gray-50 focus:border-teal-500 focus:bg-white transition-colors"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}

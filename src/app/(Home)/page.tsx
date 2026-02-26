@@ -59,12 +59,12 @@ export default function HomePage() {
     <div className="grid grid-cols-12 min-h-screen">
       {/* Left Panel (3 columns) */}
       <div className="col-span-12 md:col-span-4 bg-[#a12421] text-white p-8 hidden md:flex flex-col justify-center items-center">
-        <img src="logo.png" alt="JSPM NTC Logo" />
+        <img src="scoe_logo.png" alt="SCOE Logo" />
         <span className="text-2xl font-extralight text-center">
           Jayawant Shikshan Prasarak Mandal's
         </span>
         <h1 className="text-4xl font-bold mt-4 text-center text-shadow-lg uppercase">
-          JSPM's Narhe Technical Campus, Pune
+          Sinhgad College Of Engineering, Pune
         </h1>
         <p className="mt-2 text-center text-lg">
           S. No. 12/1/2 & 12/2, Near-Westernly Bypass Road, Narhe, Pune - 411041

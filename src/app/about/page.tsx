@@ -17,7 +17,7 @@ export default function AboutPage() {
                     <div>
                         <h2 className="text-2xl font-bold text-[#8B1A1A] mb-4">Our Legacy</h2>
                         <p className="text-gray-600 leading-relaxed mb-4">
-                            JSPM's Narhe Technical Campus (NTC) was established in 2011 by the Jayawant Shikshan Prasarak Mandal (JSPM).
+                            Sinhgad College Of Engineering (SCOE) was established in 1996 by the Sinhgad Technical Education Society (STES).
                             Located in the rapidly developing area of Narhe, Pune, we are committed to producing high-quality engineers and managers who can compete globally.
                         </p>
                         <p className="text-gray-600 leading-relaxed">
@@ -61,10 +61,10 @@ export default function AboutPage() {
                         <div>
                             <h3 className="text-2xl font-bold mb-2">From the Director's Desk</h3>
                             <p className="opacity-90 leading-relaxed mb-4">
-                                "We believe in holistic development. Education is not just about syllabus, but about building character and capability. JSPM NTC provides the perfect ecosystem for this growth."
+                                "We believe in holistic development. Education is not just about syllabus, but about building character and capability. Sinhgad College Of Engineering provides the perfect ecosystem for this growth."
                             </p>
                             <p className="font-bold text-yellow-300">– Prof. Dr. T. J. Sawant</p>
-                            <p className="text-xs opacity-70">Director, JSPM NTC</p>
+                            <p className="text-xs opacity-70">Principal, SCOE</p>
                         </div>
                     </div>
                 </section>
@@ -74,9 +74,9 @@ export default function AboutPage() {
                     <h2 className="text-3xl font-bold text-center text-gray-800 mb-10">Campus Gallery & Sports</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                         {[
-                            { url: "/gallery/jspm_campus_1.jpg", title: "Main Campus Building" },
-                            { url: "/gallery/jspm_campus_2.jpg", title: "NTC Infrastructure" },
-                            { url: "/gallery/jspm_campus_3.jpg", title: "College View" },
+                            { url: "/gallery/scoe_campus_1.jpg", title: "Main Campus Building" },
+                            { url: "/gallery/scoe_campus_2.jpg", title: "SCOE Infrastructure" },
+                            { url: "/gallery/scoe_campus_3.jpg", title: "College View" },
                             { url: "/gallery/sports_1.jpg", title: "Sports Event" },
                             { url: "/gallery/sports_2.jpg", title: "Cultural Gathering" },
                             { url: "/gallery/sports_3.jpg", title: "MESA Event" }
@@ -96,7 +96,7 @@ export default function AboutPage() {
                     <h2 className="text-3xl font-bold text-center text-gray-800 mb-10">Locate Us</h2>
                     <div className="w-full h-96 rounded-2xl overflow-hidden shadow-lg border border-gray-200">
                         <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15136.425827318898!2d73.8158253148281!3d18.45174598762516!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc29452da679697%3A0xc363402cf3c9c9!2sJSPM%20Narhe%20Technical%20Campus%2C%20Pune!5e0!3m2!1sen!2sin!4v1625642642234!5m2!1sen!2sin"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3784.442!2d73.834!3d18.459!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2eab!2sSinhgad%20College%20of%20Engineering!5e0!3m2!1sen!2sin!4v1625642642234!5m2!1sen!2sin"
                             width="100%"
                             height="100%"
                             style={{ border: 0 }}
