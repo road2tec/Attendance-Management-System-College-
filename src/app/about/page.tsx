@@ -22,7 +22,7 @@ export default function AboutPage() {
                         </p>
                         <p className="text-gray-600 leading-relaxed">
                             Our institute is approved by AICTE, New Delhi, recognized by the Government of Maharashtra, and affiliated with Savitribai Phule Pune University (SPPU).
-                            We hold an impressive <span className="font-bold text-gray-800">NAAC 'A' Grade</span> accreditation.
+                            We hold an impressive <span className="font-bold text-gray-800">NAAC 'A+' Grade</span> accreditation.
                         </p>
                     </div>
                     <div className="bg-gray-200 h-64 rounded-xl flex items-center justify-center text-gray-400 overflow-hidden relative">
@@ -39,15 +39,15 @@ export default function AboutPage() {
                     <div className="bg-gray-50 p-8 rounded-xl border-l-4 border-yellow-500 shadow-sm">
                         <h3 className="text-xl font-bold text-gray-800 mb-4">Our Vision</h3>
                         <p className="text-gray-600">
-                            "To serve the society, industry and all stakeholders through value-added quality education and create competent and professional engineers."
+                            "We are committed to produce not only good engineers but good human beings, also."
                         </p>
                     </div>
                     <div className="bg-gray-50 p-8 rounded-xl border-l-4 border-[#8B1A1A] shadow-sm">
                         <h3 className="text-xl font-bold text-gray-800 mb-4">Our Mission</h3>
                         <ul className="list-disc list-inside text-gray-600 space-y-2">
-                            <li>To provide state-of-the-art infrastructure and facilities.</li>
-                            <li>To promote research and innovation among students.</li>
-                            <li>To inculcate ethical values and leadership qualities.</li>
+                            <li>Holistic development of students and teachers.</li>
+                            <li>Imbibing a unique value system and transparent work culture.</li>
+                            <li>Generating, preserving and sharing knowledge for a vibrant society.</li>
                         </ul>
                     </div>
                 </section>
@@ -56,14 +56,14 @@ export default function AboutPage() {
                 <section className="bg-[#8B1A1A] text-white p-10 rounded-2xl shadow-xl">
                     <div className="flex flex-col md:flex-row gap-8 items-center">
                         <div className="w-32 h-32 bg-gray-300 rounded-full border-4 border-white shrink-0 overflow-hidden">
-                            <img src="/principal_real.jpg" alt="Director Prof. Dr. T. J. Sawant" className="w-full h-full object-cover" />
+                            <img src="/principal_real.jpg" alt="Principal Dr. S. D. Lokhande" className="w-full h-full object-cover" />
                         </div>
                         <div>
                             <h3 className="text-2xl font-bold mb-2">From the Director's Desk</h3>
                             <p className="opacity-90 leading-relaxed mb-4">
-                                "We believe in holistic development. Education is not just about syllabus, but about building character and capability. Sinhgad College Of Engineering provides the perfect ecosystem for this growth."
+                                "Holistic development of students and teachers in what we believe in and work for. We strive to achieve this by imbibing a unique value system and transparent work culture."
                             </p>
-                            <p className="font-bold text-yellow-300">– Prof. Dr. T. J. Sawant</p>
+                            <p className="font-bold text-yellow-300">– Dr. S. D. Lokhande</p>
                             <p className="text-xs opacity-70">Principal, SCOE</p>
                         </div>
                     </div>

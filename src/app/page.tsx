@@ -47,7 +47,7 @@ export default function Home() {
                 <div className="flex gap-4 mt-2 md:mt-0 opacity-80 text-xs uppercase tracking-wide">
                     <span>DTE Code: 6755</span>
                     <span>|</span>
-                    <span>NAAC 'A' Grade</span>
+                    <span>NAAC 'A+' Grade</span>
                 </div>
             </div>
 
@@ -235,7 +235,7 @@ export default function Home() {
                                 </div>
                             </div>
                             <div className="mt-4">
-                                <h3 className="text-xl font-bold text-gray-800">Prof. Dr. T. J. Sawant</h3>
+                                <h3 className="text-xl font-bold text-gray-800">Dr. S. D. Lokhande</h3>
                                 <p className="text-[#1A365D] font-semibold">Principal, SCOE</p>
                                 <div className="flex gap-2 mt-2">
                                     <div className="w-8 h-8 bg-black text-white flex items-center justify-center text-xs">f</div>
@@ -249,10 +249,7 @@ export default function Home() {
                         <div className="md:w-2/3 text-gray-600 leading-relaxed text-lg space-y-6 text-justify">
                             <p className="font-semibold text-gray-800">Dear Stakeholders, <br /> Greetings!</p>
                             <p>
-                                It is with great pride and a deep sense of responsibility that I extend my heartfelt welcome to all our valued stakeholders — students, parents, faculty, alumni, industry partners, and well-wishers — who form the backbone of Sinhgad College Of Engineering.
-                            </p>
-                            <p>
-                                At SCOE, we are committed to creating an environment that nurtures academic excellence, innovation, ethical values, and holistic development. Our mission is to empower students with strong technical knowledge, problem-solving skills, and leadership qualities that will enable them to contribute meaningfully to society and the nation.
+                                At SCOE, we are committed to produce not only good engineers but good human beings, also. Our mission is the Holistic development of students and teachers in what we believe in and work for. We strive to achieve this by imbibing a unique value system, transparent work culture, excellent academic and physical environment conducive to learning, creativity and technology transfer. Our mandate is to generate, preserve and share knowledge for developing a vibrant society.
                             </p>
                             <p>
                                 We believe that education is a collaborative journey. The trust and support of our stakeholders inspire us to continuously evolve, adopt the best educational practices, strengthen our research initiatives, and build strong industry-academia linkages. Together, we work towards shaping not just engineers, but responsible citizens and future leaders who will drive global progress.
