@@ -1,3 +1,5 @@
+import { IconActivity, IconUsers } from "@tabler/icons-react";
+
 export default function AboutPage() {
     return (
         <div className="min-h-screen bg-white font-sans text-gray-800">

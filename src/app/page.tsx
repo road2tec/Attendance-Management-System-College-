@@ -87,10 +87,6 @@ export default function Home() {
                             Facilities
                             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#8B1A1A] transition-all group-hover:w-full"></span>
                         </Link>
-                        <Link href="/navigation" className="hover:text-[#8B1A1A] transition-colors relative group font-bold flex items-center gap-1">
-                            <IconMapPin size={16} /> Navigation
-                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#8B1A1A] transition-all group-hover:w-full"></span>
-                        </Link>
 
                         {/* Login Button */}
                         <Link href="/login" className="flex items-center gap-2 bg-[#8B1A1A] text-white px-5 py-2.5 rounded-full hover:bg-[#801b1b] transition-all transform hover:-translate-y-0.5 shadow-md shadow-red-900/10">

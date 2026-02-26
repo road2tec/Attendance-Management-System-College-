@@ -112,8 +112,7 @@ export default function LoginPage() {
             <div className="md:w-[65%] relative bg-gray-200">
                 {/* Background Image */}
                 <div
-                    className="absolute inset-0 z-0 bg-cover bg-center"
-                    className="absolute inset-0 bg-gradient-to-br from-[#1A365D] to-[#8B1A1A] opacity-20"
+                    className="absolute inset-0 z-0 bg-cover bg-center bg-gradient-to-br from-[#1A365D] to-[#8B1A1A] opacity-20"
                 >
                     <div className="absolute inset-0 bg-black/20"></div> {/* Overlay */}
                 </div>
