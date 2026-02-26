@@ -77,7 +77,7 @@ export default function HomePage() {
             <br />
             <strong>
               Recognised by Govt. of Maharashtra, DTE Mumbai. DTE Code
-              6755, NAAC : A Grade, ISO 9001: 2015
+              6177, NAAC : A+ Grade, ISO 9001: 2015
             </strong>
           </span>
         </p>

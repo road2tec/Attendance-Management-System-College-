@@ -45,7 +45,7 @@ export default function Home() {
                     </span>
                 </div>
                 <div className="flex gap-4 mt-2 md:mt-0 opacity-80 text-xs uppercase tracking-wide">
-                    <span>DTE Code: 6755</span>
+                    <span>DTE Code: 6177</span>
                     <span>|</span>
                     <span>NAAC 'A+' Grade</span>
                 </div>

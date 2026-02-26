@@ -104,7 +104,7 @@ export default function LoginPage() {
                 <div className="text-xs space-y-1 opacity-70 border-t border-white/20 pt-6 mt-2 w-full max-w-xs">
                     <p>Approved by AICTE New Delhi, Affiliated to Savitribai Phule Pune University (SPPU)</p>
                     <p>Recognised by Govt. of Maharashtra, DTE Mumbai.</p>
-                    <p className="font-semibold text-yellow-300">DTE Code 6755 | NAAC : A Grade | NBA Accredited | ISO 9001: 2015</p>
+                    <p className="font-semibold text-yellow-300">DTE Code 6177 | NAAC : A+ Grade | NBA Accredited | ISO 9001: 2015</p>
                 </div>
             </div>
 
