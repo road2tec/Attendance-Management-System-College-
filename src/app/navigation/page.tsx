@@ -104,7 +104,7 @@ export default function NavigationPage() {
                                         <div key={i} className="pl-6 relative">
                                             {/* Timeline Dot */}
                                             <div className={`absolute -left-[9px] top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm ${i === 0 ? 'bg-green-500' :
-                                                    i === result.path.length - 1 ? 'bg-red-500' : 'bg-blue-400'
+                                                i === result.path.length - 1 ? 'bg-red-500' : 'bg-blue-400'
                                                 }`}></div>
 
                                             <h4 className="font-bold text-gray-800 text-sm">{CAMPUS_NODES[node].label}</h4>
@@ -132,7 +132,7 @@ export default function NavigationPage() {
                     {/* Background Pattern/Image */}
                     <div
                         className="absolute inset-0 bg-cover bg-center opacity-40 pointer-events-none mix-blend-multiply"
-                        style={{ backgroundImage: "url('/campus_bg.png')" }}
+                        className="w-full h-full bg-gradient-to-br from-[#1A365D] to-[#8B1A1A]"
                     ></div>
 
                     {/* Interactive Layer */}
@@ -180,8 +180,8 @@ export default function NavigationPage() {
                                         {/* Pin Icon */}
                                         <div className={`flex flex-col items-center ${isStart || isEnd ? 'scale-110' : 'scale-100 hover:scale-110'}`}>
                                             <div className={`p-1.5 rounded-full shadow-lg border-2 border-white text-white ${isStart ? 'bg-green-600' :
-                                                    isEnd ? 'bg-red-600' :
-                                                        isInPath ? 'bg-blue-500' : 'bg-gray-400'
+                                                isEnd ? 'bg-red-600' :
+                                                    isInPath ? 'bg-blue-500' : 'bg-gray-400'
                                                 }`}>
                                                 <IconMapPin size={isStart || isEnd ? 24 : 16} fill="currentColor" />
                                             </div>

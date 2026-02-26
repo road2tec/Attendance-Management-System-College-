@@ -59,7 +59,9 @@ export default function HomePage() {
     <div className="grid grid-cols-12 min-h-screen">
       {/* Left Panel (3 columns) */}
       <div className="col-span-12 md:col-span-4 bg-[#a12421] text-white p-8 hidden md:flex flex-col justify-center items-center">
-        <img src="scoe_logo.png" alt="SCOE Logo" />
+        <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mb-6 border border-white/30 text-3xl font-bold">
+          SCOE
+        </div>
         <span className="text-2xl font-extralight text-center">
           Sinhgad Technical Education Society's
         </span>
@@ -87,13 +89,13 @@ export default function HomePage() {
       <div
         className="col-span-12 md:col-span-8 flex justify-center items-center p-8"
         style={{
-          backgroundImage: 'url("/bg-image.png")',
+          background: 'linear-gradient(135deg, #1A365D 0%, #8B1A1A 100%)',
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
       >
         <div className="bg-base-100 rounded-2xl bg-opacity-80 p-8 shadow-md w-full max-w-sm border border-t-2 border-primary text-base-content">
-          <img src="/logo.png" alt="Logo" className="mb-4 lg:hidden mx-auto" />
+          <div className="w-16 h-16 bg-[#8B1A1A] rounded-full flex items-center justify-center text-white font-bold text-xl mb-4 lg:hidden mx-auto">SCOE</div>
           <h2 className="text-2xl font-semibold mb-6 text-center">
             Login to Your Account
           </h2>

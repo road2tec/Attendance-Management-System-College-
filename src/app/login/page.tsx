@@ -113,7 +113,7 @@ export default function LoginPage() {
                 {/* Background Image */}
                 <div
                     className="absolute inset-0 z-0 bg-cover bg-center"
-                    style={{ backgroundImage: "url('https://content3.jdmagicbox.com/comp/indapur/p6/9999p2111.2111.120601140019.s8p6/catalogue/s-b-patil-college-of-engineering-bijawadi-indapur-colleges-4gb0szt.jpg')" }} // Campus Placeholder
+                    className="absolute inset-0 bg-gradient-to-br from-[#1A365D] to-[#8B1A1A] opacity-20"
                 >
                     <div className="absolute inset-0 bg-black/20"></div> {/* Overlay */}
                 </div>

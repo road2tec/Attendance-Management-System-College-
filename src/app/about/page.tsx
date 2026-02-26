@@ -25,12 +25,8 @@ export default function AboutPage() {
                             We hold an impressive <span className="font-bold text-gray-800">NAAC 'A+' Grade</span> accreditation.
                         </p>
                     </div>
-                    <div className="bg-gray-200 h-64 rounded-xl flex items-center justify-center text-gray-400 overflow-hidden relative">
-                        <img
-                            src="/campus_inner.jpg"
-                            alt="College Building"
-                            className="w-full h-full object-cover"
-                        />
+                    <div className="bg-gradient-to-br from-gray-100 to-gray-200 h-64 rounded-xl flex items-center justify-center text-gray-400 overflow-hidden relative border border-gray-200">
+                        <IconActivity size={64} className="opacity-20" />
                     </div>
                 </section>
 
@@ -55,8 +51,8 @@ export default function AboutPage() {
                 {/* Principal's Desk */}
                 <section className="bg-[#8B1A1A] text-white p-10 rounded-2xl shadow-xl">
                     <div className="flex flex-col md:flex-row gap-8 items-center">
-                        <div className="w-32 h-32 bg-gray-300 rounded-full border-4 border-white shrink-0 overflow-hidden">
-                            <img src="/principal_real.jpg" alt="Principal Dr. S. D. Lokhande" className="w-full h-full object-cover" />
+                        <div className="w-32 h-32 bg-gray-300 rounded-full border-4 border-white shrink-0 overflow-hidden flex items-center justify-center">
+                            <IconUsers size={48} className="text-white opacity-50" />
                         </div>
                         <div>
                             <h3 className="text-2xl font-bold mb-2">From the Director's Desk</h3>
@@ -69,23 +65,21 @@ export default function AboutPage() {
                     </div>
                 </section>
 
-                {/* Campus Gallery Section */}
+                {/* Campus Features Section */}
                 <section className="py-8">
-                    <h2 className="text-3xl font-bold text-center text-gray-800 mb-10">Campus Gallery & Sports</h2>
+                    <h2 className="text-3xl font-bold text-center text-gray-800 mb-10">Academic Excellence</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                         {[
-                            { url: "/gallery/scoe_campus_1.jpg", title: "Main Campus Building" },
-                            { url: "/gallery/scoe_campus_2.jpg", title: "SCOE Infrastructure" },
-                            { url: "/gallery/scoe_campus_3.jpg", title: "College View" },
-                            { url: "/gallery/sports_1.jpg", title: "Sports Event" },
-                            { url: "/gallery/sports_2.jpg", title: "Cultural Gathering" },
-                            { url: "/gallery/sports_3.jpg", title: "MESA Event" }
-                        ].map((img, i) => (
-                            <div key={i} className="group relative overflow-hidden rounded-xl shadow-md h-64 bg-gray-100">
-                                <img src={img.url} alt={img.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                                    <p className="text-white font-semibold text-lg">{img.title}</p>
-                                </div>
+                            { title: "Modern Laboratories", desc: "State-of-the-art labs for all engineering departments." },
+                            { title: "Research Center", desc: "Dedicated spaces for innovation and development." },
+                            { title: "Library", desc: "Extensive collection of digital and physical resources." },
+                            { title: "Sports Complex", desc: "Facilities for overall physical development." },
+                            { title: "Cultural Hub", desc: "Platforms for extracurricular talent." },
+                            { title: "Placement Cell", desc: "Excellent track record with top recruiters." }
+                        ].map((feature, i) => (
+                            <div key={i} className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                                <h4 className="font-bold text-[#8B1A1A] mb-2">{feature.title}</h4>
+                                <p className="text-sm text-gray-500">{feature.desc}</p>
                             </div>
                         ))}
                     </div>

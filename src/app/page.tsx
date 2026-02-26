@@ -120,8 +120,7 @@ export default function Home() {
                 {/* Background Image with Overlay */}
                 <div className="absolute inset-0 z-0 select-none pointer-events-none">
                     <div
-                        className="w-full h-full bg-cover bg-center animate-pan-slow"
-                        style={{ backgroundImage: "url('/campus_bg.png')" }}
+                        className="w-full h-full bg-gradient-to-br from-[#1A365D] via-[#2A4365] to-[#8B1A1A] animate-gradient-slow"
                     ></div>
                     <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-transparent"></div>
                 </div>
@@ -230,8 +229,8 @@ export default function Home() {
                         {/* Principal Image Placeholder - Since we don't have a direct URL, using a professional avatar or placeholder */}
                         <div className="md:w-1/3 w-full">
                             <div className="bg-gray-100 rounded-lg p-2 border border-gray-200">
-                                <div className="aspect-[3/4] bg-gray-200 w-full relative overflow-hidden flex items-end justify-center">
-                                    <img src="/principal_real.jpg" alt="Director Dr. M. M. Sardeshmukh" className="w-full h-full object-cover object-top" />
+                                <div className="aspect-[3/4] bg-gray-200 w-full relative overflow-hidden flex items-center justify-center">
+                                    <IconUsers size={80} className="text-gray-400 opacity-50" />
                                 </div>
                             </div>
                             <div className="mt-4">
