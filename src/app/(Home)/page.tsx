@@ -61,13 +61,13 @@ export default function HomePage() {
       <div className="col-span-12 md:col-span-4 bg-[#a12421] text-white p-8 hidden md:flex flex-col justify-center items-center">
         <img src="scoe_logo.png" alt="SCOE Logo" />
         <span className="text-2xl font-extralight text-center">
-          Jayawant Shikshan Prasarak Mandal's
+          Sinhgad Technical Education Society's
         </span>
         <h1 className="text-4xl font-bold mt-4 text-center text-shadow-lg uppercase">
           Sinhgad College Of Engineering, Pune
         </h1>
         <p className="mt-2 text-center text-lg">
-          S. No. 12/1/2 & 12/2, Near-Westernly Bypass Road, Narhe, Pune - 411041
+          S. No. 44/1, Vadgaon (Bk), Off Sinhgad Road, Pune - 411041
           <br />
           <span className="mt-2 text-center text-base">
             <strong>

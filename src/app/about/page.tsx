@@ -18,7 +18,7 @@ export default function AboutPage() {
                         <h2 className="text-2xl font-bold text-[#8B1A1A] mb-4">Our Legacy</h2>
                         <p className="text-gray-600 leading-relaxed mb-4">
                             Sinhgad College Of Engineering (SCOE) was established in 1996 by the Sinhgad Technical Education Society (STES).
-                            Located in the rapidly developing area of Narhe, Pune, we are committed to producing high-quality engineers and managers who can compete globally.
+                            Located in the rapidly developing area of Vadgaon (Bk), Pune, we are committed to producing high-quality engineers and managers who can compete globally.
                         </p>
                         <p className="text-gray-600 leading-relaxed">
                             Our institute is approved by AICTE, New Delhi, recognized by the Government of Maharashtra, and affiliated with Savitribai Phule Pune University (SPPU).

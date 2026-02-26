@@ -38,7 +38,7 @@ export default function Home() {
             <div className="bg-[#8B1A1A] text-white py-2 px-6 text-sm flex flex-col md:flex-row justify-between items-center z-50 relative">
                 <div className="flex gap-4">
                     <span className="flex items-center gap-1 hover:text-yellow-300 transition-colors cursor-pointer">
-                        <IconPhone size={14} /> +91-8262983871
+                        <IconPhone size={14} /> 020-24354705
                     </span>
                     <span className="flex items-center gap-1 hover:text-yellow-300 transition-colors cursor-pointer">
                         <IconMail size={14} /> principal.scoe@sinhgad.edu
@@ -294,11 +294,11 @@ export default function Home() {
                         <ul className="space-y-4 text-gray-400">
                             <li className="flex gap-3">
                                 <IconMapPin className="shrink-0 text-[#8B1A1A]" />
-                                S No. 12-1-2 & 12-2-2, Narhe, Taluka-Haveli, Near Sanas Crane, Pune-Bangalore Highway, Pune - 411041. Landmark: Navale Bridge.
+                                S. No. 44/1, Vadgaon (Bk), Off Sinhgad Road, Pune - 411041. Landmark: Vadgaon Campus.
                             </li>
                             <li className="flex gap-3">
                                 <IconPhone className="shrink-0 text-[#8B1A1A]" />
-                                +91-8262983871
+                                020-24354705
                             </li>
                             <li className="flex gap-3">
                                 <IconMail className="shrink-0 text-[#8B1A1A]" />

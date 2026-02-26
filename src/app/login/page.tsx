@@ -93,12 +93,12 @@ export default function LoginPage() {
                     <span className="text-[#1A365D] text-2xl font-bold leading-none">SCOE PUNE</span>
                 </div>
 
-                <p className="uppercase tracking-widest text-sm mb-2 opacity-80">Jayawant Shikshan Prasarak Mandal&apos;s</p>
+                <p className="uppercase tracking-widest text-sm mb-2 opacity-80">Sinhgad Technical Education Society&apos;s</p>
                 <h1 className="text-3xl font-bold mb-4 leading-tight">
                     Sinhgad College Of <br /> Engineering, Pune
                 </h1>
                 <p className="text-sm opacity-80 mb-6 max-w-sm">
-                    S No. 12-1-2 & 12-2-2, Narhe, Near Navale Bridge, Pune-Bangalore Highway, Pune - 411041
+                    S. No. 44/1, Vadgaon (Bk), Off Sinhgad Road, Pune - 411041
                 </p>
 
                 <div className="text-xs space-y-1 opacity-70 border-t border-white/20 pt-6 mt-2 w-full max-w-xs">

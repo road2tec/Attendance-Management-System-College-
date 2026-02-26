@@ -9,7 +9,7 @@ const facilities = [
     {
         title: "Transport",
         icon: IconBus,
-        desc: "Fleet of buses covering Narhe, Dhayari, Katraj and surrounding areas in Pune for easy commute."
+        desc: "Fleet of buses covering Vadgaon, Dhayari, Katraj and surrounding areas in Pune for easy commute."
     },
     {
         title: "Sports Complex",
